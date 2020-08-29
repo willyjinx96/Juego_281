@@ -1,8 +1,42 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Recursos/Terreno.tres" type="TileSet" id=1]
 [ext_resource path="res://Recursos/decoracion.tres" type="TileSet" id=2]
 [ext_resource path="res://Jugador/rey.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Recursos/repisas.tres" type="TileSet" id=4]
+[ext_resource path="res://Assets/Sprites/15-Queen/crying_queen.png" type="Texture" id=5]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 32, 40 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 5 )
+region = Rect2( 32, 0, 32, 40 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 5 )
+region = Rect2( 64, 0, 32, 40 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 5 )
+region = Rect2( 96, 0, 32, 40 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 5 )
+region = Rect2( 128, 0, 32, 40 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 5 )
+region = Rect2( 160, 0, 32, 40 )
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
 
 [node name="Main_level" type="Node2D"]
 
@@ -17,7 +51,18 @@ position = Vector2( 1, 0 )
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( 196611, 7, 0, 393222, 6, 0, 458759, 7, 0, 524294, 6, 0, 524295, 7, 0, 524299, 2, 0, 524300, 2, 1, 589835, 2, 65536, 589836, 2, 65537, 589850, 2, 0, 589851, 2, 1, 655386, 2, 65536, 655387, 2, 65537, 720926, 7, 0, 851988, 4, 0, 917513, 3, 0, 917514, 3, 1, 917516, 3, 0, 917517, 3, 1, 917524, 4, 65536, 917526, 5, 0, 983049, 3, 65536, 983050, 3, 65537, 983052, 3, 65536, 983053, 3, 65537, 983060, 4, 65536, 983062, 5, 196608, 1048579, 3, 0, 1048580, 3, 1, 1048596, 4, 131072, 1114115, 3, 65536, 1114116, 3, 65537 )
+tile_data = PoolIntArray( 65557, 2, 0, 65558, 2, 1, 131076, 1, 0, 131078, 1, 0, 131093, 2, 65536, 131094, 2, 65537, 196612, 1, 196608, 196614, 1, 196608, 393222, 6, 0, 393235, 0, 0, 458771, 0, 65536, 524294, 6, 0, 524299, 2, 0, 524300, 2, 1, 524307, 0, 131072, 589835, 2, 65536, 589836, 2, 65537, 589850, 2, 0, 589851, 2, 1, 655386, 2, 65536, 655387, 2, 65537, 851973, 0, 0, 851974, 1, 0, 851988, 4, 0, 917509, 0, 65536, 917510, 1, 65536, 917513, 3, 0, 917514, 3, 1, 917516, 3, 0, 917517, 3, 1, 917524, 4, 0, 917525, 1, 0, 917526, 5, 0, 983045, 0, 65536, 983046, 1, 65536, 983049, 3, 65536, 983050, 3, 65537, 983052, 3, 65536, 983053, 3, 65537, 983060, 4, 0, 983061, 1, 196608, 983062, 5, 0, 1048579, 3, 0, 1048580, 3, 1, 1048581, 0, 131072, 1048582, 1, 196608, 1048596, 1, 0, 1048598, 3, 0, 1048599, 3, 1, 1114115, 3, 65536, 1114116, 3, 65537, 1114132, 1, 196608, 1114134, 3, 65536, 1114135, 3, 65537 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 393223, 2, 0, 524291, 0, 0, 524295, 1, 0, 524296, 1, 0, 524297, 2, 0, 786461, 0, 0, 786462, 1, 0, 1048594, 1, 0, 1048595, 2, 0 )
 
 [node name="rey" parent="." instance=ExtResource( 3 )]
 position = Vector2( 84.9814, 519.974 )
+
+[node name="queen" type="AnimatedSprite" parent="."]
+position = Vector2( 929.453, 79.2353 )
+frames = SubResource( 7 )
+playing = true
