@@ -111,18 +111,27 @@ animations = [ {
 "speed": 6.0
 } ]
 
-[sub_resource type="CircleShape2D" id=18]
-radius = 5.70626
+[sub_resource type="CapsuleShape2D" id=25]
+radius = 5.41147
+height = 5.42278
 
 [node name="CerdoEnemigo" type="KinematicBody2D"]
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 17 )
-animation = "caminar"
+animation = "atacar"
 frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 2.99031, 7.54697 )
-shape = SubResource( 18 )
+position = Vector2( 2.63636, 5.54124 )
+shape = SubResource( 25 )
+
+[node name="detectarFrente" type="RayCast2D" parent="."]
+position = Vector2( 2.66585, 5.19139 )
+rotation = 1.5708
+scale = Vector2( 1, 0.3 )
+enabled = true
+
+[node name="caminar" type="Timer" parent="."]
