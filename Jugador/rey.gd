@@ -15,12 +15,14 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed("ui_right"):
 		motion.x =min(motion.x+ACCELERATION, MAX_SPEED)
-		$CollisionShape2D.position.x=-16.689
+		#$CollisionShape2D.position.x=-16.689
+		$AnimatedSprite.position.x=8.689
 		
 		$AnimatedSprite.flip_h = false
 		$AnimatedSprite.play("run")
 	elif Input.is_action_pressed("ui_left"):
-		$CollisionShape2D.position.x=3
+		$CollisionShape2D.position.x=0
+		$AnimatedSprite.position.x=-8.689
 		motion.x =max(motion.x - ACCELERATION, -MAX_SPEED)
 		$AnimatedSprite.flip_h=true
 		$AnimatedSprite.play("run")
