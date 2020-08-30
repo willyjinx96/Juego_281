@@ -65,7 +65,11 @@ position = Vector2( 84.9814, 519.974 )
 [node name="queen" type="AnimatedSprite" parent="."]
 position = Vector2( 929.453, 79.2353 )
 frames = SubResource( 7 )
+<<<<<<< HEAD:Terreno/Main_level.tscn
 frame = 1
+=======
+frame = 2
+>>>>>>> 5ec338377c3b5e6ceb6096fb0360a3f9675f3b5e:Pruebas/Main_level.tscn
 playing = true
 
 [node name="CerdoEnemigo" parent="." instance=ExtResource( 6 )]
