@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Recursos/Terreno.tres" type="TileSet" id=1]
 [ext_resource path="res://Recursos/decoracion.tres" type="TileSet" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Recursos/repisas.tres" type="TileSet" id=4]
 [ext_resource path="res://Assets/Sprites/15-Queen/crying_queen.png" type="Texture" id=5]
 [ext_resource path="res://Enemigos/cerdo/CerdoEnemigo.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Pruebas/Main_level.gd" type="Script" id=7]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 5 )
@@ -39,7 +40,11 @@ animations = [ {
 "speed": 8.0
 } ]
 
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 14.7561, 29.8924 )
+
 [node name="Main_level" type="Node2D"]
+script = ExtResource( 7 )
 
 [node name="castillo" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
@@ -70,3 +75,10 @@ playing = true
 
 [node name="CerdoEnemigo" parent="." instance=ExtResource( 6 )]
 position = Vector2( 211.083, 427.361 )
+
+[node name="danio" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="danio"]
+position = Vector2( 520.996, 484.461 )
+shape = SubResource( 8 )
+[connection signal="body_entered" from="danio" to="rey" method="_on_danio_body_entered"]
