@@ -60,17 +60,16 @@ format = 1
 tile_data = PoolIntArray( 393223, 2, 0, 524291, 0, 0, 524295, 1, 0, 524296, 1, 0, 524297, 2, 0, 524305, 9, 0, 524306, 10, 0, 786461, 0, 0, 786462, 1, 0, 1048594, 1, 0, 1048595, 2, 0 )
 
 [node name="rey" parent="." instance=ExtResource( 3 )]
-position = Vector2( 84.9814, 519.974 )
+position = Vector2( 424.981, 453.974 )
 
 [node name="queen" type="AnimatedSprite" parent="."]
 position = Vector2( 929.453, 79.2353 )
 frames = SubResource( 7 )
-<<<<<<< HEAD:Terreno/Main_level.tscn
-frame = 1
-=======
 frame = 2
->>>>>>> 5ec338377c3b5e6ceb6096fb0360a3f9675f3b5e:Pruebas/Main_level.tscn
 playing = true
 
+[node name="CerdoEnemigo2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 555, 415 )
+
 [node name="CerdoEnemigo" parent="." instance=ExtResource( 6 )]
-position = Vector2( 211.083, 427.361 )
+position = Vector2( 201.849, 423.365 )
