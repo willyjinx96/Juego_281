@@ -51,48 +51,48 @@ atlas = ExtResource( 1 )
 region = Rect2( 340, 0, 34, 28 )
 
 [sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 34, 28 )
 
 [sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 34, 0, 34, 28 )
 
 [sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 68, 0, 34, 28 )
 
 [sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 102, 0, 34, 28 )
 
 [sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 136, 0, 34, 28 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 34, 28 )
+region = Rect2( 170, 0, 34, 28 )
 
 [sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 4 )
-region = Rect2( 34, 0, 34, 28 )
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 34, 28 )
 
 [sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 4 )
-region = Rect2( 68, 0, 34, 28 )
+atlas = ExtResource( 2 )
+region = Rect2( 34, 0, 34, 28 )
 
 [sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 4 )
-region = Rect2( 102, 0, 34, 28 )
+atlas = ExtResource( 2 )
+region = Rect2( 68, 0, 34, 28 )
 
 [sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 4 )
-region = Rect2( 136, 0, 34, 28 )
+atlas = ExtResource( 2 )
+region = Rect2( 102, 0, 34, 28 )
 
 [sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 4 )
-region = Rect2( 170, 0, 34, 28 )
+atlas = ExtResource( 2 )
+region = Rect2( 136, 0, 34, 28 )
 
 [sub_resource type="AtlasTexture" id=23]
 atlas = ExtResource( 5 )
@@ -105,15 +105,15 @@ animations = [ {
 "name": "parado",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
-"loop": true,
-"name": "atacar",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
 "loop": true,
 "name": "caminar",
 "speed": 6.0
+}, {
+"frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
+"loop": true,
+"name": "atacar",
+"speed": 5.0
 }, {
 "frames": [ SubResource( 23 ) ],
 "loop": true,
@@ -135,7 +135,7 @@ script = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 24 )
 animation = "atacar"
-frame = 1
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -147,7 +147,6 @@ position = Vector2( 2.66585, 5.19139 )
 rotation = 1.5708
 scale = Vector2( 1, 0.3 )
 enabled = true
-cast_to = Vector2( 0, 50 )
 
 [node name="detectarPiso" type="RayCast2D" parent="detectarFrente"]
 position = Vector2( -0.000335217, 49.9995 )

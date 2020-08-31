@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Recursos/movement.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Jugador/Rey_p1.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+height = 7.97741
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 28.8497
+
+[sub_resource type="Animation" id=3]
+resource_name = "hit"
+length = 0.5
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 10.5244
+height = 8.20731
+
+[node name="KinematicBody2D" type="KinematicBody2D"]
+pause_mode = 1
+script = ExtResource( 2 )
+vidas = 3
+
+[node name="movement" type="AnimatedSprite" parent="."]
+frames = ExtResource( 1 )
+animation = "dead"
+frame = 6
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -7.9725, 1.51988 )
+shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.5, 0.5 )
+process_mode = 0
+limit_smoothed = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+smoothing_speed = 15.0
+
+[node name="ataque" type="Area2D" parent="."]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ataque"]
+visible = false
+position = Vector2( 10.119, 0 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/hit = SubResource( 3 )
+
+[node name="danio" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="danio"]
+position = Vector2( -7.55951, 1.5749 )
+shape = SubResource( 4 )
+[connection signal="attack" from="." to="." method="_on_KinematicBody2D_attack"]
+[connection signal="animation_finished" from="movement" to="." method="_on_movement_animation_finished"]
+[connection signal="area_entered" from="danio" to="." method="_on_danio_area_entered"]
+[connection signal="body_entered" from="danio" to="." method="_on_danio_body_entered"]

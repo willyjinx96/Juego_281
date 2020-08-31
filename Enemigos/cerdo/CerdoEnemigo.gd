@@ -7,6 +7,7 @@ var velocidad_movimiento=50
 var moverX=Vector2(-1,0)
 var saveMoveX
 var estaAtacando=false
+var nombreJugador="Rey_p1"
 
 enum {CAMINAR,ATACAR,PARADO,CAIDA}
 var estado
@@ -70,7 +71,7 @@ func _physics_process(delta):
 		#print(nombreObjetoFrente)
 		if nombreObjetoFrente=="castillo":
 			cambiarDireccionMovimiento()
-		elif nombreObjetoFrente=="rey" and $duracionAtaque.is_stopped():
+		elif nombreObjetoFrente==nombreJugador and $duracionAtaque.is_stopped():
 			cambiarTransicion_a(ATACAR)
 			estaAtacando=true
 			$duracionAtaque.start(1)

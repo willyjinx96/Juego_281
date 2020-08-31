@@ -1,11 +1,12 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Recursos/Terreno.tres" type="TileSet" id=1]
 [ext_resource path="res://Recursos/decoracion.tres" type="TileSet" id=2]
-[ext_resource path="res://Jugador/rey.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Jugador/Rey_p1.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Recursos/repisas.tres" type="TileSet" id=4]
 [ext_resource path="res://Assets/Sprites/15-Queen/crying_queen.png" type="Texture" id=5]
 [ext_resource path="res://Enemigos/cerdo/CerdoEnemigo.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Pruebas/Main_level.gd" type="Script" id=7]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 5 )
@@ -40,6 +41,7 @@ animations = [ {
 } ]
 
 [node name="Main_level" type="Node2D"]
+script = ExtResource( 7 )
 
 [node name="castillo" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
@@ -59,14 +61,14 @@ cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( 393223, 2, 0, 524291, 0, 0, 524295, 1, 0, 524296, 1, 0, 524297, 2, 0, 524305, 9, 0, 524306, 10, 0, 786461, 0, 0, 786462, 1, 0, 1048594, 1, 0, 1048595, 2, 0 )
 
-[node name="rey" parent="." instance=ExtResource( 3 )]
-position = Vector2( 424.981, 453.974 )
-
 [node name="queen" type="AnimatedSprite" parent="."]
 position = Vector2( 929.453, 79.2353 )
 frames = SubResource( 7 )
-frame = 2
+frame = 3
 playing = true
+
+[node name="Rey_p1" parent="." instance=ExtResource( 3 )]
+position = Vector2( 316.177, 462.493 )
 
 [node name="CerdoEnemigo2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 555, 415 )
