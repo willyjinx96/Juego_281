@@ -30,13 +30,13 @@ height = 8.20731
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 pause_mode = 1
+collision_mask = 2
 script = ExtResource( 2 )
 vidas = 3
 
 [node name="movement" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "hit"
-frame = 3
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="movement"]

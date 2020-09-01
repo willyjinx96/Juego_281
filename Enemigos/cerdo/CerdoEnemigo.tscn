@@ -75,28 +75,28 @@ atlas = ExtResource( 1 )
 region = Rect2( 340, 0, 34, 28 )
 
 [sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 34, 28 )
 
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 34, 28 )
+region = Rect2( 34, 0, 34, 28 )
 
 [sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 2 )
-region = Rect2( 34, 0, 34, 28 )
+region = Rect2( 68, 0, 34, 28 )
 
 [sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 2 )
-region = Rect2( 68, 0, 34, 28 )
+region = Rect2( 102, 0, 34, 28 )
 
 [sub_resource type="AtlasTexture" id=22]
 atlas = ExtResource( 2 )
-region = Rect2( 102, 0, 34, 28 )
+region = Rect2( 136, 0, 34, 28 )
 
 [sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 2 )
-region = Rect2( 136, 0, 34, 28 )
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 34, 28 )
 
 [sub_resource type="SpriteFrames" id=24]
 animations = [ {
@@ -110,14 +110,14 @@ animations = [ {
 "name": "parado",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 18 ) ],
-"loop": true,
-"name": "caida",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ) ],
+"frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
 "loop": true,
 "name": "atacar",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 23 ) ],
+"loop": true,
+"name": "caida",
 "speed": 5.0
 } ]
 
@@ -130,11 +130,13 @@ radius = 4.82465
 height = 8.46458
 
 [node name="CerdoEnemigo" type="KinematicBody2D"]
+collision_layer = 2
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 24 )
 animation = "atacar"
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

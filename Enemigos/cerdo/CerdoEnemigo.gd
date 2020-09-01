@@ -103,7 +103,12 @@ func cambiarDireccionMovimiento():
 		$AnimatedSprite.flip_h=false
 		$hitbox.position.x=-9
 
-
+func launchRay(var vect):
+	var estadoEspacial=get_world_2d().direct_space_state
+	
+	var resultadoRayo=estadoEspacial.intersect_ray(global_position,vect,[self])
+	
+	#if str(resultadoRayo)
 
 func _on_duracionAtaque_timeout():
 	cambiarTransicion_a(PARADO)
