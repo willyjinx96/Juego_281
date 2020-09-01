@@ -4,10 +4,10 @@
 [ext_resource path="res://Recursos/movement.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://Jugador/rey.gd" type="Script" id=11]
 
-[sub_resource type="RectangleShape2D" id=42]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14, 10 )
 
-[sub_resource type="CapsuleShape2D" id=43]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 13.5
 height = 19.5
 
@@ -16,12 +16,12 @@ script = ExtResource( 11 )
 
 [node name="AnimatedSprite" parent="." instance=ExtResource( 1 )]
 frames = ExtResource( 2 )
-frame = 4
+frame = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.0708672, -1.37952 )
 rotation = -1.5708
-shape = SubResource( 42 )
+shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( -0.0293579, -0.067688 )
@@ -38,7 +38,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ataque"]
-shape = SubResource( 43 )
+shape = SubResource( 2 )
 disabled = true
 
 [node name="danio" type="Area2D" parent="."]

@@ -3,7 +3,7 @@
 [ext_resource path="res://Recursos/movement.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Jugador/Rey_p1.gd" type="Script" id=2]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 resource_name = "hit"
 length = 0.5
 tracks/0/type = "method"
@@ -18,10 +18,10 @@ tracks/0/keys = {
 "values": [  ]
 }
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=2]
 height = 7.97741
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=3]
 radius = 28.8497
 
 [sub_resource type="CapsuleShape2D" id=4]
@@ -36,18 +36,17 @@ vidas = 3
 [node name="movement" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "hit"
-frame = 1
+frame = 3
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="movement"]
-anims/hit = SubResource( 3 )
+anims/hit = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -7.972, 1.52 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-current = true
 zoom = Vector2( 0.5, 0.5 )
 process_mode = 0
 limit_smoothed = true
@@ -63,7 +62,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ataque"]
 position = Vector2( 10.119, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 disabled = true
 
 [node name="danio" type="Area2D" parent="."]

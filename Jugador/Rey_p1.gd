@@ -34,8 +34,8 @@ func _ready():
 	transition_to(IDLE)
 	
 func _physics_process(delta):
-	print(motion)
-	print(vidas)
+	#print(motion)
+	#print(vidas)
 	if current_animation != new_animation:
 		current_animation= new_animation
 		$movement.play(current_animation)
