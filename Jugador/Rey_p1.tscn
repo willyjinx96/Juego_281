@@ -3,15 +3,26 @@
 [ext_resource path="res://Recursos/movement.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Jugador/Rey_p1.gd" type="Script" id=2]
 
+[sub_resource type="Animation" id=3]
+resource_name = "hit"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/path = NodePath("..")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"values": [  ]
+}
+
 [sub_resource type="CapsuleShape2D" id=1]
 height = 7.97741
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 28.8497
-
-[sub_resource type="Animation" id=3]
-resource_name = "hit"
-length = 0.5
 
 [sub_resource type="CapsuleShape2D" id=4]
 radius = 10.5244
@@ -24,13 +35,15 @@ vidas = 3
 
 [node name="movement" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-animation = "dead"
-frame = 6
+animation = "hit"
+frame = 1
 playing = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="movement"]
+anims/hit = SubResource( 3 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( -7.9725, 1.51988 )
+position = Vector2( -7.972, 1.52 )
 shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -49,13 +62,9 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ataque"]
-visible = false
 position = Vector2( 10.119, 0 )
 shape = SubResource( 2 )
 disabled = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/hit = SubResource( 3 )
 
 [node name="danio" type="Area2D" parent="."]
 
@@ -64,5 +73,6 @@ position = Vector2( -7.55951, 1.5749 )
 shape = SubResource( 4 )
 [connection signal="attack" from="." to="." method="_on_KinematicBody2D_attack"]
 [connection signal="animation_finished" from="movement" to="." method="_on_movement_animation_finished"]
+[connection signal="animation_finished" from="movement/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="area_entered" from="danio" to="." method="_on_danio_area_entered"]
 [connection signal="body_entered" from="danio" to="." method="_on_danio_body_entered"]

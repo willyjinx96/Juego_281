@@ -9,8 +9,8 @@ var new_animation
 #fisica de movimientos
 const UP = Vector2(0,-1)
 const GRAVITY = 15
-const ACCELERATION = 50
-const MAX_SPEED = 200
+var ACCELERATION = 50
+var MAX_SPEED = 200
 const MAX_JUMP_HEIGHT = -400
 const MIN_JUMP_HEIGHT = -200
 var motion=Vector2()
@@ -30,6 +30,7 @@ var hurt =false
 export var vidas = 6
 
 func _ready():
+	motion=position
 	transition_to(IDLE)
 	
 func _physics_process(delta):
@@ -38,7 +39,8 @@ func _physics_process(delta):
 	if current_animation != new_animation:
 		current_animation= new_animation
 		$movement.play(current_animation)
-	if vidas <=0:
+	
+	if vidas <=0 :
 		transition_to(DEAD)
 	
 	motion.y += GRAVITY
@@ -72,6 +74,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_page_up"):
 		emit_signal("attack")
 		print("ataco....")
+	
 	#estados movimiento
 	var running = (Input.is_action_pressed("ui_right") or Input.is_action_pressed("ui_left"))
 	var not_running = (Input.is_action_just_released("ui_right") or Input.is_action_just_released("ui_left"))
@@ -93,7 +96,6 @@ func _physics_process(delta):
 	if state==RUN and !is_on_floor():
 		transition_to(FALL)
 	#print (current_animation, motion)
-	
 	#estados ataque
 	if state in [RUN, IDLE] and attacking:
 		transition_to(ATTACK)
@@ -112,6 +114,8 @@ func _physics_process(delta):
 	#estados danio
 	if state in [IDLE, RUN, JUMP, FALL] and hurt:
 		transition_to(HIT)
+		$movement/AnimationPlayer.play("hit")
+		MAX_SPEED=-150
 		motion = Vector2.ZERO
 	if state == HIT and is_on_floor() and animation_finished==2:
 		transition_to(IDLE)
@@ -157,10 +161,10 @@ func _on_movement_animation_finished():
 		animation_finished=1
 		attacking=false
 		$ataque/CollisionShape2D.disabled=true
-	if $movement.animation== "hit":
-		animation_finished=2
-		hurt=false
-		attacking=false
+#	if $movement.animation== "hit":
+#		animation_finished=2
+#		hurt=false
+#		attacking=false
 	if $movement.animation=="dead":
 		pausar()
 
@@ -182,3 +186,13 @@ func _on_danio_body_entered(body):
 	if body.is_in_group("enemigos"):
 		vidas -=1
 		hurt =true
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "hit":
+		animation_finished=2
+		hurt=false
+		attacking=false
+		MAX_SPEED=200
+
+
