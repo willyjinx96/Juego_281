@@ -74,6 +74,7 @@ func _physics_process(delta):
 		elif nombreObjetoFrente==nombreJugador and $duracionAtaque.is_stopped():
 			cambiarTransicion_a(ATACAR)
 			estaAtacando=true
+			
 			$duracionAtaque.start(1)
 			$caminar.stop()
 			$duracionParado.stop()
@@ -113,6 +114,7 @@ func launchRay(var vect):
 func _on_duracionAtaque_timeout():
 	cambiarTransicion_a(PARADO)
 	estaAtacando=false
+	$hitbox/CollisionShape2D.disabled=true
 	$duracionAtaque.stop()
 	$duracionParado.start(rand_range(3,5))
 
@@ -120,7 +122,6 @@ func _on_duracionAtaque_timeout():
 func _on_caminar_timeout():
 	cambiarTransicion_a(PARADO)
 	$caminar.stop()
-	
 	$duracionParado.start(rand_range(5,8))
 
 
@@ -132,11 +133,16 @@ func _on_duracionParado_timeout():
 
 func golpeandoJugador():
 	var numFrame=$AnimatedSprite.frame
-	if (numFrame==2 or numFrame==3) and estaAtacando:
+	var intervaloAtaque=(numFrame==2 or numFrame==3) and estaAtacando
+	
+	if intervaloAtaque:
 		print("atacado")
+		
 		numGolpes+=1
 		print(numGolpes)
 		estaAtacando=false
+		$hitbox/CollisionShape2D.disabled=false
+		
 
 var numGolpes=0
 
@@ -144,5 +150,10 @@ var numGolpes=0
 
 
 func _on_hitbox_body_exited(body):
-	estaAtacando=false
+	#estaAtacando=false
+	$hitbox/CollisionShape2D.disabled=true
 	emit_signal("darGolpe")
+
+
+func _on_hitbox_body_entered(body):
+	print(body.name)

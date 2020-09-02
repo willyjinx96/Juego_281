@@ -111,7 +111,7 @@ animations = [ {
 "speed": 10.0
 }, {
 "frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
-"loop": true,
+"loop": false,
 "name": "atacar",
 "speed": 5.0
 }, {
@@ -136,7 +136,7 @@ script = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 24 )
 animation = "atacar"
-frame = 2
+frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -148,6 +148,7 @@ position = Vector2( 2.66585, 5.19139 )
 rotation = 1.5708
 scale = Vector2( 1, 0.3 )
 enabled = true
+cast_to = Vector2( 0, 35 )
 
 [node name="detectarPiso" type="RayCast2D" parent="detectarFrente"]
 position = Vector2( -0.000335217, 49.9995 )
@@ -167,10 +168,13 @@ wait_time = 5.0
 "enemigos",
 ]]
 position = Vector2( -9, 0 )
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 shape = SubResource( 26 )
+disabled = true
 [connection signal="timeout" from="caminar" to="." method="_on_caminar_timeout"]
 [connection signal="timeout" from="duracionAtaque" to="." method="_on_duracionAtaque_timeout"]
 [connection signal="timeout" from="duracionParado" to="." method="_on_duracionParado_timeout"]
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_exited" from="hitbox" to="." method="_on_hitbox_body_exited"]
