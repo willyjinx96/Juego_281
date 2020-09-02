@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/Sprites/10-Cannon/Idle.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Sprites/10-Cannon/Shoot (44x28).png" type="Texture" id=2]
+[ext_resource path="res://Objetos/Cannon/cannon.gd" type="Script" id=3]
+[ext_resource path="res://Objetos/Cannon/shooting.gd" type="Script" id=4]
 
 [sub_resource type="PhysicsMaterial" id=8]
 friction = 0.2
@@ -43,10 +45,15 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 11.9749, 8.96694 )
 
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 64.5751, 232.695 )
+
 [node name="cannon" type="RigidBody2D"]
 collision_layer = 8
 collision_mask = 5
 physics_material_override = SubResource( 8 )
+gravity_scale = 30.03
+script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
@@ -58,3 +65,18 @@ position = Vector2( 6.98604, 1.90961 )
 shape = SubResource( 7 )
 
 [node name="shooting" type="Position2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="direccion" type="RayCast2D" parent="."]
+cast_to = Vector2( 15, 0 )
+collision_mask = 4
+
+[node name="area_danio" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="area_danio"]
+position = Vector2( 0.730194, 64.6283 )
+rotation = 1.5708
+shape = SubResource( 9 )
+[connection signal="shoot" from="." to="shooting" method="_on_cannon_shoot"]
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="body_entered" from="area_danio" to="." method="_on_area_danio_body_entered"]

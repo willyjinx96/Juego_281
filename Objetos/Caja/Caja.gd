@@ -2,7 +2,7 @@ extends RigidBody2D
 
 var current_position
 var dst_position = Vector2(0,0)
-var delta =2
+var delta =3
 
 func _ready():
 	current_position = position
