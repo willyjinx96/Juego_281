@@ -30,7 +30,8 @@ height = 8.20731
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 pause_mode = 1
-collision_mask = 2
+collision_layer = 2
+collision_mask = 55
 script = ExtResource( 2 )
 vidas = 3
 
@@ -47,6 +48,7 @@ position = Vector2( -7.972, 1.52 )
 shape = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+current = true
 zoom = Vector2( 0.5, 0.5 )
 process_mode = 0
 limit_smoothed = true
