@@ -61,6 +61,9 @@ ui_page_down={
 2d_physics/layer_1="player"
 2d_physics/layer_2="enemy"
 2d_physics/layer_3="object"
+2d_physics/layer_4="enemy_object"
+2d_physics/layer_5="enviroment"
+2d_physics/layer_6="items"
 
 [rendering]
 

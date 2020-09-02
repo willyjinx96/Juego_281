@@ -63,7 +63,7 @@ format = 1
 tile_data = PoolIntArray( 393223, 2, 0, 524295, 1, 0, 524296, 1, 0, 524297, 2, 0, 524305, 9, 0, 524306, 10, 0, 786461, 0, 0, 786462, 1, 0, 1048594, 1, 0, 1048595, 2, 0 )
 
 [node name="cannon2" parent="." instance=ExtResource( 9 )]
-position = Vector2( 53, 528 )
+position = Vector2( 767, 72 )
 
 [node name="queen" type="AnimatedSprite" parent="."]
 position = Vector2( 929.453, 79.2353 )
@@ -72,7 +72,7 @@ frame = 2
 playing = true
 
 [node name="Rey_p1" parent="." instance=ExtResource( 3 )]
-position = Vector2( 266, 182 )
+position = Vector2( 78, 549 )
 
 [node name="CerdoEnemigo2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 537.077, 417.106 )

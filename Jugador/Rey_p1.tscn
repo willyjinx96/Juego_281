@@ -1,22 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Recursos/movement.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Jugador/Rey_p1.gd" type="Script" id=2]
-
-[sub_resource type="Animation" id=1]
-resource_name = "hit"
-length = 0.5
-tracks/0/type = "method"
-tracks/0/path = NodePath("..")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"values": [  ]
-}
 
 [sub_resource type="CapsuleShape2D" id=2]
 height = 7.97741
@@ -30,18 +15,19 @@ height = 8.20731
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 pause_mode = 1
+position = Vector2( -50, 0 )
 collision_mask = 55
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
 vidas = 3
 
 [node name="movement" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-animation = "hit"
-frame = 3
+animation = "idle"
+frame = 4
 playing = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="movement"]
-anims/hit = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -7.972, 1.52 )
@@ -74,6 +60,5 @@ position = Vector2( -7.55951, 1.5749 )
 shape = SubResource( 4 )
 [connection signal="attack" from="." to="." method="_on_KinematicBody2D_attack"]
 [connection signal="animation_finished" from="movement" to="." method="_on_movement_animation_finished"]
-[connection signal="animation_finished" from="movement/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="area_entered" from="danio" to="." method="_on_danio_area_entered"]
 [connection signal="body_entered" from="danio" to="." method="_on_danio_body_entered"]

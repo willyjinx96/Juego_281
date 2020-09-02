@@ -28,23 +28,19 @@ var hurt =false
 #variables de vida
 
 export var vidas = 6000
+var dead =false
 
 func _ready():
-	motion=position
 	transition_to(IDLE)
 	
 func _physics_process(delta):
-	#print(motion)
-	#print(vidas)
-	if current_animation != new_animation:
-		current_animation= new_animation
-		$movement.play(current_animation)
-	
-	if vidas <=0 :
-		transition_to(DEAD)
-	
+	estados()
+	if vidas ==0:
+		dead = true
+
 	motion.y += GRAVITY
 	var friction =false
+	
 	#Para movimiento derecha e izquierda
 	if Input.is_action_pressed("ui_right"):
 		$movement.flip_h=false
@@ -75,61 +71,11 @@ func _physics_process(delta):
 		emit_signal("attack")
 		print("ataco....")
 	
-	#estados movimiento
-	var running = (Input.is_action_pressed("ui_right") or Input.is_action_pressed("ui_left"))
-	var not_running = (Input.is_action_just_released("ui_right") or Input.is_action_just_released("ui_left"))
-	
-	if state == IDLE and running:
-		transition_to(RUN)
-	if state == RUN and not_running:
-		transition_to(IDLE)
-	if state in [IDLE,RUN] and motion.y<0:
-		transition_to(JUMP)
-	if state==JUMP and motion.y>=0:
-		transition_to(FALL)
-	if state==FALL and is_on_floor():
-		transition_to(GROUND)
-	if state==GROUND and is_on_floor():
-		transition_to(IDLE)
-	if state==RUN and is_on_wall():
-		transition_to(IDLE)
-	if state==RUN and !is_on_floor():
-		transition_to(FALL)
-	#print (current_animation, motion)
-	#estados ataque
-	if state in [RUN, IDLE] and attacking:
-		transition_to(ATTACK)
-		motion.x=0
-	if state in [JUMP, FALL] and attacking:
-		transition_to(ATTACK)
-	if state == ATTACK and animation_finished==1 and is_on_floor():
-		transition_to(IDLE)
-	if state == ATTACK and animation_finished==1 and motion.y<0:
-		transition_to(JUMP)
-	if state == ATTACK and animation_finished==1 and motion.y>=0:
-		transition_to(FALL)
-	
-	#estados accion
-	
-	#estados danio
-	if state in [IDLE, RUN, JUMP, FALL] and hurt:
-		transition_to(HIT)
-		$movement/AnimationPlayer.play("hit")
-		MAX_SPEED=-150
-		motion = Vector2.ZERO
-	if state == HIT and is_on_floor() and animation_finished==2:
-		transition_to(IDLE)
-		motion.x=0
-	if state==HIT and !is_on_floor() and animation_finished==2:
-		transition_to(FALL)
-		motion.y=0
-	if state in [HIT,IDLE,JUMP,FALL] and is_on_floor() and vidas==0 and animation_finished==2:
-		transition_to(DEAD)
-			
 	animation_finished=0
-	
-	motion = move_and_slide(motion,UP)
-		
+
+	if not dead:
+		motion = move_and_slide(motion,UP)
+
 
 func transition_to(new_state):
 	state=new_state
@@ -161,10 +107,11 @@ func _on_movement_animation_finished():
 		animation_finished=1
 		attacking=false
 		$ataque/CollisionShape2D.disabled=true
-#	if $movement.animation== "hit":
-#		animation_finished=2
-#		hurt=false
-#		attacking=false
+	if $movement.animation== "hit":
+		animation_finished=2
+		hurt=false
+		attacking=false
+		MAX_SPEED=200
 	if $movement.animation=="dead":
 		pausar()
 
@@ -172,27 +119,72 @@ func _on_KinematicBody2D_attack():
 	$ataque/CollisionShape2D.disabled=false
 	attacking=true
 
-
 func _on_danio_area_entered(area):
 	if area.is_in_group("enemigos"):
-		vidas -=1
-		hurt =true
+		damage()
 
 func pausar():
 	get_tree().paused=true
 
-
 func _on_danio_body_entered(body):
 	if body.is_in_group("enemigos"):
-		vidas -=1
-		hurt =true
+		damage()
 
+func damage():
+	vidas -=1
+	hurt =true
+	MAX_SPEED=-150
+	motion = Vector2.ZERO
 
-func _on_AnimationPlayer_animation_finished(anim_name):
-	if anim_name == "hit":
-		animation_finished=2
-		hurt=false
-		attacking=false
-		MAX_SPEED=200
+func estados():
+	if current_animation != new_animation:
+		current_animation= new_animation
+		$movement.play(current_animation)
 
+#estados movimiento
+	var running = (Input.is_action_pressed("ui_right") or Input.is_action_pressed("ui_left"))
+	var not_running = (Input.is_action_just_released("ui_right") or Input.is_action_just_released("ui_left"))
+	
+	if state == IDLE and running:
+		transition_to(RUN)
+	if state == RUN and not_running:
+		transition_to(IDLE)
+	if state in [IDLE,RUN] and motion.y<0:
+		transition_to(JUMP)
+	if state==JUMP and motion.y>=0:
+		transition_to(FALL)
+	if state==FALL and is_on_floor():
+		transition_to(GROUND)
+	if state==GROUND and is_on_floor():
+		transition_to(IDLE)
+	if state==RUN and is_on_wall():
+		transition_to(IDLE)
+	if state==RUN and !is_on_floor():
+		transition_to(FALL)
 
+#estados ataque
+	if state in [RUN, IDLE] and attacking:
+		transition_to(ATTACK)
+		motion.x=0
+	if state in [JUMP, FALL] and attacking:
+		transition_to(ATTACK)
+	if state == ATTACK and animation_finished==1 and is_on_floor():
+		transition_to(IDLE)
+	if state == ATTACK and animation_finished==1 and motion.y<0:
+		transition_to(JUMP)
+	if state == ATTACK and animation_finished==1 and motion.y>=0:
+		transition_to(FALL)
+	
+#estados accion
+
+#estados danio
+	if state in [IDLE, RUN, JUMP, FALL] and hurt:
+		transition_to(HIT)
+	if state == HIT and is_on_floor() and animation_finished==2:
+		transition_to(IDLE)
+		motion.x=0
+	if state==HIT and !is_on_floor() and animation_finished==2:
+		transition_to(FALL)
+		motion.y=0
+	if state in [HIT,IDLE,JUMP,FALL] and vidas==0 and animation_finished==2:
+		transition_to(DEAD)
