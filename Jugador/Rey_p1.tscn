@@ -37,6 +37,7 @@ vidas = 3
 [node name="movement" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "hit"
+frame = 2
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="movement"]
@@ -47,6 +48,7 @@ position = Vector2( -7.972, 1.52 )
 shape = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+current = true
 zoom = Vector2( 0.5, 0.5 )
 process_mode = 0
 limit_smoothed = true

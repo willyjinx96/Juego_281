@@ -27,7 +27,7 @@ var hurt =false
 
 #variables de vida
 
-export var vidas = 6
+export var vidas = 6000
 
 func _ready():
 	motion=position

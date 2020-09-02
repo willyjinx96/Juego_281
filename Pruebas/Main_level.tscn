@@ -64,14 +64,14 @@ tile_data = PoolIntArray( 393223, 2, 0, 524291, 0, 0, 524295, 1, 0, 524296, 1, 0
 [node name="queen" type="AnimatedSprite" parent="."]
 position = Vector2( 929.453, 79.2353 )
 frames = SubResource( 7 )
-frame = 3
+frame = 1
 playing = true
 
 [node name="Rey_p1" parent="." instance=ExtResource( 3 )]
 position = Vector2( 316.177, 462.493 )
 
 [node name="CerdoEnemigo2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 221, 526 )
+position = Vector2( 537.077, 417.106 )
 
 [node name="CerdoEnemigo" parent="." instance=ExtResource( 6 )]
-position = Vector2( 138.849, 484.365 )
+position = Vector2( 477.553, 484.365 )
