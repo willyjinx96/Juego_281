@@ -28,11 +28,7 @@ vidas = 3
 [node name="movement" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "joy"
-<<<<<<< HEAD
 frame = 6
-=======
-frame = 5
->>>>>>> ea5ab08172c3773329c924d1472d4eeccf9dea46
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
