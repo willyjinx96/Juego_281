@@ -123,7 +123,7 @@ animations = [ {
 "frames": [ SubResource( 26 ), SubResource( 27 ), SubResource( 26 ), SubResource( 27 ) ],
 "loop": false,
 "name": "danio",
-"speed": 4.0
+"speed": 8.0
 }, {
 "frames": [ SubResource( 22 ) ],
 "loop": true,
