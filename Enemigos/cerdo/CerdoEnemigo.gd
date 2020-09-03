@@ -9,7 +9,7 @@ var saveMoveX
 var estaAtacando=false
 var nombreJugador="Rey_p1"
 
-enum {CAMINAR,ATACAR,PARADO,CAIDA}
+enum {CAMINAR,ATACAR,PARADO,CAIDA,DANIO}
 var estado
 var estadoAux
 var animacion_Actual
@@ -31,6 +31,9 @@ func cambiarTransicion_a(nuevo_estado):
 			guardarMovimientoEnX()
 		CAIDA:
 			nueva_animacion="caida"
+			guardarMovimientoEnX()
+		DANIO:
+			nueva_animacion="danio"
 			guardarMovimientoEnX()
 
 
@@ -65,11 +68,11 @@ func _physics_process(delta):
 	var deteccionPiso=$detectarFrente/detectarPiso.get_collider()
 	var esEnPiso=is_on_floor()
 	
-	if deteccionFrente!=null and esEnPiso:
+	if deteccionFrente!=null and esEnPiso and estado!=DANIO:
 		#cambiarTransicion_a(CAMINAR)
 		var nombreObjetoFrente=deteccionFrente.get("name")
 		#print(nombreObjetoFrente)
-		if nombreObjetoFrente=="castillo":
+		if nombreObjetoFrente=="castillo" and estado!=DANIO:
 			cambiarDireccionMovimiento()
 		elif nombreObjetoFrente==nombreJugador and $duracionAtaque.is_stopped():
 			cambiarTransicion_a(ATACAR)
@@ -83,13 +86,31 @@ func _physics_process(delta):
 	elif !esEnPiso and moverX!=saveMoveX:
 		cambiarTransicion_a(CAIDA)
 	
+	
 	if !$duracionAtaque.is_stopped():
 		golpeandoJugador()
 	
 	posicion+=moverX
 	
 	posicion.x=posicion.x*velocidad_movimiento
+	
+	if estado==DANIO:
+		posicion.x*=-1
+	
 	move_and_slide(posicion,Vector2(0,-1))
+
+
+
+func hacerDanio()->void:
+	if estado!=DANIO:
+		$caminar.stop()
+		$duracionParado.stop()
+		$duracionAtaque.stop()
+		estaAtacando=false
+		cambiarTransicion_a(DANIO)
+		$hitbox/CollisionShape2D.disabled=true
+	
+	
 
 func cambiarDireccionMovimiento():
 	moverX*=-1
@@ -111,12 +132,10 @@ func launchRay(var vect):
 	
 	#if str(resultadoRayo)
 
+
+##BORRAR ESTO DESPUES si no se encuentra uso al timer de duracion Ataque
 func _on_duracionAtaque_timeout():
-	cambiarTransicion_a(PARADO)
-	estaAtacando=false
-	$hitbox/CollisionShape2D.disabled=true
-	$duracionAtaque.stop()
-	$duracionParado.start(rand_range(3,5))
+	pass
 
 
 func _on_caminar_timeout():
@@ -157,3 +176,17 @@ func _on_hitbox_body_exited(body):
 
 func _on_hitbox_body_entered(body):
 	print(body.name)
+
+
+func _on_AnimatedSprite_animation_finished():
+	
+	match estado:
+		ATACAR:
+			cambiarTransicion_a(PARADO)
+			estaAtacando=false
+			$hitbox/CollisionShape2D.disabled=true
+			$duracionAtaque.stop()
+			$duracionParado.start(rand_range(3,5))
+		DANIO:
+			cambiarTransicion_a(CAMINAR)
+			$caminar.start(rand_range(8,14))
