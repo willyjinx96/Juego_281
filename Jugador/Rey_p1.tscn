@@ -30,7 +30,7 @@ height = 8.20731
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 pause_mode = 1
-collision_mask = 55
+collision_mask = 2
 script = ExtResource( 2 )
 vidas = 3
 
@@ -58,6 +58,9 @@ smoothing_enabled = true
 smoothing_speed = 15.0
 
 [node name="ataque" type="Area2D" parent="."]
+input_pickable = false
+collision_layer = 0
+collision_mask = 2
 __meta__ = {
 "_edit_group_": true
 }
@@ -75,5 +78,6 @@ shape = SubResource( 4 )
 [connection signal="attack" from="." to="." method="_on_KinematicBody2D_attack"]
 [connection signal="animation_finished" from="movement" to="." method="_on_movement_animation_finished"]
 [connection signal="animation_finished" from="movement/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="body_entered" from="ataque" to="." method="_on_ataque_body_entered"]
 [connection signal="area_entered" from="danio" to="." method="_on_danio_area_entered"]
 [connection signal="body_entered" from="danio" to="." method="_on_danio_body_entered"]

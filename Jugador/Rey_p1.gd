@@ -196,3 +196,9 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		MAX_SPEED=200
 
 
+
+#WILLY ESTO HICE PARA PROBAR EL LLAMADO DEL CERDITO AL HACERLE DAÑO :V
+func _on_ataque_body_entered(body):
+	
+	print(body.name)
+	body.hacerDanio()
