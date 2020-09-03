@@ -146,8 +146,8 @@ script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 25 )
-animation = "danio"
-frame = 3
+animation = "caminar"
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -170,8 +170,6 @@ enabled = true
 [node name="caminar" type="Timer" parent="."]
 wait_time = 14.0
 
-[node name="duracionAtaque" type="Timer" parent="."]
-
 [node name="duracionParado" type="Timer" parent="."]
 wait_time = 5.0
 
@@ -186,7 +184,6 @@ shape = SubResource( 27 )
 disabled = true
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="timeout" from="caminar" to="." method="_on_caminar_timeout"]
-[connection signal="timeout" from="duracionAtaque" to="." method="_on_duracionAtaque_timeout"]
 [connection signal="timeout" from="duracionParado" to="." method="_on_duracionParado_timeout"]
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_exited" from="hitbox" to="." method="_on_hitbox_body_exited"]

@@ -55,6 +55,7 @@ func _ready():
 
 
 
+# warning-ignore:unused_argument
 func _physics_process(delta):
 	#procesos constantes  -----------------------
 	if animacion_Actual!=nueva_animacion:
@@ -69,17 +70,15 @@ func _physics_process(delta):
 	var deteccionFrente=$detectarFrente.get_collider()
 	var deteccionPiso=$detectarFrente/detectarPiso.get_collider()
 	var esEnPiso=is_on_floor()
+	#print(abs(get_node("../Rey_p1").position-global_position))
 	
 	if deteccionFrente!=null and esEnPiso and estado!=DANIO:
-		#cambiarTransicion_a(CAMINAR)
 		var nombreObjetoFrente=deteccionFrente.get("name")
-		#print(nombreObjetoFrente)
 		if nombreObjetoFrente=="castillo" and estado!=DANIO:
 			cambiarDireccionMovimiento()
 		elif nombreObjetoFrente==nombreJugador and estado!=ATACAR and animacion_Actual!="atacar" and !estaAtacando:
 			cambiarTransicion_a(ATACAR)
 			estaAtacando=true
-			$duracionAtaque.start(1)
 			$caminar.stop()
 			$duracionParado.stop()
 	elif deteccionPiso==null and esEnPiso:
@@ -95,6 +94,7 @@ func _physics_process(delta):
 	
 	posicion.x=posicion.x*velocidad_movimiento
 	
+# warning-ignore:return_value_discarded
 	move_and_slide(posicion,Vector2(0,-1))
 
 
@@ -103,7 +103,6 @@ func hacerDanio(var ejeX)->void:
 	if estado!=DANIO:
 		$caminar.stop()
 		$duracionParado.stop()
-		$duracionAtaque.stop()
 		estaAtacando=false
 		cambiarTransicion_a(DANIO)
 		$hitbox/CollisionShape2D.set_deferred("disabled",true)
@@ -140,10 +139,6 @@ func launchRay(var vect):
 	#if str(resultadoRayo)
 
 
-##BORRAR ESTO DESPUES si no se encuentra uso al timer de duracion Ataque
-func _on_duracionAtaque_timeout():
-	pass
-
 
 func _on_caminar_timeout():
 	cambiarTransicion_a(PARADO)
@@ -162,29 +157,23 @@ func golpeandoJugador():
 	var intervaloAtaque=(numFrame>=2 and numFrame<=3) and estaAtacando and animacion_Actual=="atacar"
 	
 	if intervaloAtaque:
-		print("atacado")
-		
-		numGolpes+=1
-		print(numGolpes)
 		estaAtacando=false
 		$hitbox/CollisionShape2D.set_deferred("disabled",false)
 		
 		
 
 
-var numGolpes=0
 
 
 
-
+# warning-ignore:unused_argument
 func _on_hitbox_body_exited(body):
-	#estaAtacando=false
+	estaAtacando=false
 	$hitbox/CollisionShape2D.set_deferred("disabled",true)
 	emit_signal("darGolpe")
 
 
 func _on_hitbox_body_entered(body):
-	print(body.name)
 	body.damage()
 
 
@@ -195,7 +184,6 @@ func _on_AnimatedSprite_animation_finished():
 			cambiarTransicion_a(PARADO)
 			estaAtacando=false
 			$hitbox/CollisionShape2D.set_deferred("disabled",true)
-			$duracionAtaque.stop()
 			$duracionParado.start(rand_range(3,5))
 		DANIO:
 			cambiarTransicion_a(CAMINAR)
