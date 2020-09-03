@@ -121,14 +121,16 @@ func _on_KinematicBody2D_attack():
 
 func _on_danio_area_entered(area):
 	if area.is_in_group("enemigos"):
-		damage()
+		#damage()
+		pass
 
 func pausar():
 	get_tree().paused=true
 
 func _on_danio_body_entered(body):
 	if body.is_in_group("enemigos"):
-		damage()
+		#damage()
+		pass
 
 func damage():
 	vidas -=1
