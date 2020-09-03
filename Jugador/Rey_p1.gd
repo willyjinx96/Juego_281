@@ -201,4 +201,4 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 func _on_ataque_body_entered(body):
 	
 	print(body.name)
-	body.hacerDanio()
+	body.hacerDanio(global_position.x)
