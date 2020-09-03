@@ -194,5 +194,4 @@ func estados():
 #WILLY ESTO HICE PARA PROBAR EL LLAMADO DEL CERDITO AL HACERLE DAÑO :V
 func _on_ataque_body_entered(body):
 	
-	print(body.name)
 	body.hacerDanio(global_position.x)
