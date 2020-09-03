@@ -177,6 +177,7 @@ func estados():
 	
 #estados accion
 
+<<<<<<< HEAD
 #estados danio
 	if state in [IDLE, RUN, JUMP, FALL] and hurt:
 		transition_to(HIT)
@@ -188,3 +189,11 @@ func estados():
 		motion.y=0
 	if state in [HIT,IDLE,JUMP,FALL] and vidas==0 and animation_finished==2:
 		transition_to(DEAD)
+=======
+
+#WILLY ESTO HICE PARA PROBAR EL LLAMADO DEL CERDITO AL HACERLE DAÑO :V
+func _on_ataque_body_entered(body):
+	
+	print(body.name)
+	body.hacerDanio(global_position.x)
+>>>>>>> ae7c367ea11436daa98e8a13b63194e653a21fe8
