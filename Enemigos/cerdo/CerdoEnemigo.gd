@@ -51,7 +51,9 @@ func _ready():
 	$caminar.start(rand_range(8,14))
 	
 	
-	
+
+
+
 
 func _physics_process(delta):
 	#procesos constantes  -----------------------
@@ -74,10 +76,9 @@ func _physics_process(delta):
 		#print(nombreObjetoFrente)
 		if nombreObjetoFrente=="castillo" and estado!=DANIO:
 			cambiarDireccionMovimiento()
-		elif nombreObjetoFrente==nombreJugador and $duracionAtaque.is_stopped():
+		elif nombreObjetoFrente==nombreJugador and estado!=ATACAR and animacion_Actual!="atacar" and !estaAtacando:
 			cambiarTransicion_a(ATACAR)
 			estaAtacando=true
-			
 			$duracionAtaque.start(1)
 			$caminar.stop()
 			$duracionParado.stop()
@@ -87,7 +88,7 @@ func _physics_process(delta):
 		cambiarTransicion_a(CAIDA)
 	
 	
-	if !$duracionAtaque.is_stopped():
+	if estado==ATACAR:
 		golpeandoJugador()
 	
 	posicion+=moverX
@@ -158,7 +159,7 @@ func _on_duracionParado_timeout():
 
 func golpeandoJugador():
 	var numFrame=$AnimatedSprite.frame
-	var intervaloAtaque=(numFrame==2 or numFrame==3) and estaAtacando
+	var intervaloAtaque=(numFrame>=2 and numFrame<=3) and estaAtacando and animacion_Actual=="atacar"
 	
 	if intervaloAtaque:
 		print("atacado")
@@ -166,8 +167,10 @@ func golpeandoJugador():
 		numGolpes+=1
 		print(numGolpes)
 		estaAtacando=false
-		$hitbox/CollisionShape2D.disabled=false
+		$hitbox/CollisionShape2D.set_deferred("disabled",false)
 		
+		
+
 
 var numGolpes=0
 
@@ -182,6 +185,7 @@ func _on_hitbox_body_exited(body):
 
 func _on_hitbox_body_entered(body):
 	print(body.name)
+	body.damage()
 
 
 func _on_AnimatedSprite_animation_finished():

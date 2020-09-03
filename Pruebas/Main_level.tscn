@@ -68,11 +68,16 @@ position = Vector2( 767, 72 )
 [node name="queen" type="AnimatedSprite" parent="."]
 position = Vector2( 929.453, 79.2353 )
 frames = SubResource( 7 )
+<<<<<<< HEAD
 frame = 2
+=======
+frame = 3
+>>>>>>> ea5ab08172c3773329c924d1472d4eeccf9dea46
 playing = true
 
 [node name="Rey_p1" parent="." instance=ExtResource( 3 )]
 position = Vector2( 78, 549 )
+vidas = 10
 
 [node name="CerdoEnemigo2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 410.267, 491.857 )

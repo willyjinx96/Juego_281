@@ -28,7 +28,11 @@ vidas = 3
 [node name="movement" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "joy"
+<<<<<<< HEAD
 frame = 6
+=======
+frame = 5
+>>>>>>> ea5ab08172c3773329c924d1472d4eeccf9dea46
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -80,5 +84,6 @@ position = Vector2( -7.55951, 1.5749 )
 shape = SubResource( 3 )
 [connection signal="attack" from="." to="." method="_on_KinematicBody2D_attack"]
 [connection signal="animation_finished" from="movement" to="." method="_on_movement_animation_finished"]
+[connection signal="body_entered" from="ataque" to="." method="_on_ataque_body_entered"]
 [connection signal="area_entered" from="danio" to="." method="_on_danio_area_entered"]
 [connection signal="body_entered" from="danio" to="." method="_on_danio_body_entered"]
