@@ -18,7 +18,9 @@ var motion=Vector2()
 #variables para accion
 signal attack #KEY_C
 var attacking =false
-signal action #KEY_X
+signal action#KEY_X
+var action_released =false
+
 var animation_finished=0
 
 #variables danio
@@ -29,51 +31,21 @@ var hurt =false
 
 export var vidas = 6000
 var dead =false
+var moverse
 
 func _ready():
+	movimiento_Personaje(true)
 	transition_to(IDLE)
 	
 func _physics_process(delta):
+	cambiar_label()
 	estados()
+	movimiento()
 	if vidas ==0:
-		dead = true
-
-	motion.y += GRAVITY
-	var friction =false
-	
-	#Para movimiento derecha e izquierda
-	if Input.is_action_pressed("ui_right"):
-		$movement.flip_h=false
-		$movement.position.x=0
-		$ataque/CollisionShape2D.position.x=10.709
-		motion.x =min(motion.x+ACCELERATION, MAX_SPEED)
-	elif Input.is_action_pressed("ui_left"):
-		$movement.flip_h=true
-		$movement.position.x=-15
-		$ataque/CollisionShape2D.position.x=-25
-		motion.x =max(motion.x - ACCELERATION, -MAX_SPEED)
-	else:
-		friction =true
-	
-	#Para el salto
-	if is_on_floor():
-		if Input.is_action_pressed("ui_up"):
-			motion.y =MAX_JUMP_HEIGHT
-		if friction == true:
-			motion.x = lerp(motion.x, 0 , 0.20)
-	elif friction == true:
-			motion.x = lerp(motion.x, 0 , 0.05)
-	if Input.is_action_just_released("ui_up") and motion.y <0:
-		motion.y =MIN_JUMP_HEIGHT
-	
-	#Para ataque
-	if Input.is_action_just_pressed("ui_page_up"):
-		emit_signal("attack")
-		print("ataco....")
-	
+		movimiento_Personaje(false)
+		
 	animation_finished=0
-
-	if not dead:
+	if moverse:
 		motion = move_and_slide(motion,UP)
 
 
@@ -106,12 +78,18 @@ func _on_movement_animation_finished():
 	if $movement.animation== "attack":
 		animation_finished=1
 		attacking=false
+		movimiento_Personaje(true)
 		$ataque/CollisionShape2D.disabled=true
 	if $movement.animation== "hit":
 		animation_finished=2
 		hurt=false
 		attacking=false
 		MAX_SPEED=200
+	if $movement.animation == "door_in":
+		animation_finished = 3
+		action_released=false
+	if $movement.animation == "door_out":
+		animation_finished=4
 	if $movement.animation=="dead":
 		pausar()
 
@@ -176,6 +154,14 @@ func estados():
 		transition_to(FALL)
 	
 #estados accion
+#	if state in [IDLE, RUN] and action_released:
+#		transition_to(DOOR_IN)
+#	if state == DOOR_IN and animation_finished==3:
+#		transition_to(DOOR_OUT)
+#	if state == DOOR_OUT and animation_finished==4:
+#		transition_to(IDLE)
+#	if state == DOOR_OUT and animation_finished==4 and running:
+#		transition_to(RUN)
 
 #estados danio
 	if state in [IDLE, RUN, JUMP, FALL] and hurt:
@@ -191,6 +177,53 @@ func estados():
 
 #WILLY ESTO HICE PARA PROBAR EL LLAMADO DEL CERDITO AL HACERLE DAÑO :V
 func _on_ataque_body_entered(body):
-	
 	print(body.name)
 	body.hacerDanio(global_position.x)
+
+func cambiar_label():
+	$Camera2D/Label.text = ("VIDAS x"+str(vidas))
+
+func accion():
+	print("accion...")
+
+func movimiento_Personaje(estado):
+	moverse=estado
+
+func movimiento():
+	motion.y += GRAVITY
+	var friction =false
+	#Para movimiento derecha e izquierda
+	if Input.is_action_pressed("ui_right"):
+		$movement.flip_h=false
+		$movement.position.x=0
+		$ataque/CollisionShape2D.position.x=10.709
+		motion.x =min(motion.x+ACCELERATION, MAX_SPEED)
+	elif Input.is_action_pressed("ui_left"):
+		$movement.flip_h=true
+		$movement.position.x=-15
+		$ataque/CollisionShape2D.position.x=-25
+		motion.x =max(motion.x - ACCELERATION, -MAX_SPEED)
+	else:
+		friction =true
+	
+	#Para el salto
+	if is_on_floor():
+		if Input.is_action_pressed("ui_up"):
+			motion.y =MAX_JUMP_HEIGHT
+		if friction == true:
+			motion.x = lerp(motion.x, 0 , 0.20)
+	elif friction == true:
+			motion.x = lerp(motion.x, 0 , 0.05)
+	if Input.is_action_just_released("ui_up") and motion.y <0:
+		motion.y =MIN_JUMP_HEIGHT
+	
+	#Para ataque
+	if Input.is_action_just_pressed("ui_page_up"):
+		emit_signal("attack")
+		if is_on_floor():
+			movimiento_Personaje(false)
+		print("ataco....")
+	
+	#Para la accion
+	if Input.is_action_just_pressed("ui_page_down"):
+		connect("action",self, "accion")
