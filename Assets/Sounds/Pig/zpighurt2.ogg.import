@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/zpighurt2.ogg-3eb125b9e5d6ad557ee4290fefdbc83d.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/Pig/zpighurt2.ogg"
+dest_files=[ "res://.import/zpighurt2.ogg-3eb125b9e5d6ad557ee4290fefdbc83d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
