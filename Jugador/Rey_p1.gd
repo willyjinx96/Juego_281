@@ -8,18 +8,21 @@ var new_animation
 
 #fisica de movimientos
 const UP = Vector2(0,-1)
-const GRAVITY = 15
+var GRAVITY = 15
 var ACCELERATION = 70
 var MAX_SPEED = 190
-const MAX_JUMP_HEIGHT = -350
-const MIN_JUMP_HEIGHT = -150
+var MAX_JUMP_HEIGHT = -350
+var MIN_JUMP_HEIGHT = -150
 var motion=Vector2()
 
 #variables para accion
 signal attack #KEY_C
-var attacking =false
-signal action#KEY_X
-var action_released =false
+var attacking = false
+var can_attack = true
+
+var can_action = false
+#signal action#KEY_X
+#var action_released =false
 
 var animation_finished=0
 
@@ -30,7 +33,7 @@ var hurt =false
 #variables de vida
 
 export var vidas = 6000
-var dead =false
+#var dead =false
 var moverse
 var input_state
 
@@ -38,19 +41,18 @@ func _ready():
 	input_state=true
 	movimiento_Personaje(true)
 	transition_to(IDLE)
+	estado_fisicas(true)
 	
 func _physics_process(delta):
 	cambiar_label()
 	estados()
-	
 	movimiento(input_state)
-	
 	if vidas <=0:
-		dead=true
+		can_attack=false
+		estado_fisicas(false)
 		movimiento_Personaje(false)
-		
+		#cambiar_estado(false)
 	animation_finished=0
-	
 	if moverse:
 		mover_a(motion)
 	if hurt:
@@ -96,33 +98,25 @@ func _on_movement_animation_finished():
 		movimiento_Personaje(true)
 	if $movement.animation == "door_in":
 		animation_finished = 3
-		action_released=false
+		#action_released=false
 	if $movement.animation == "door_out":
 		animation_finished=4
 	if $movement.animation=="dead":
+		#estado_fisicas(false)
 		pausar()
 
 func _on_KinematicBody2D_attack():
+	can_attack=false
+	$tiempo_de_ataque.start()
 	$ataque/CollisionShape2D.disabled=false
 	attacking=true
-
-#func _on_danio_area_entered(area):
-#	if area.is_in_group("enemigos"):
-#		#damage()
-#		pass
 
 func pausar():
 	get_tree().paused=true
 
-#func _on_danio_body_entered(body):
-#	if body.is_in_group("enemigos"):
-#		#damage()
-#		pass
-
 func damage():
 	vidas -=1
 	hurt =true
-	#MAX_SPEED=-150
 	cambiar_estado(false)
 	movimiento_Personaje(false)
 
@@ -210,6 +204,31 @@ func retroceso():
 	else:
 		mover_a(Vector2(-70,0))
 
+func estado_fisicas(estado):
+	if estado:
+		$ataque/CollisionShape2D.disabled=true
+		$CollisionShape2D.disabled=false
+		GRAVITY = 15
+		ACCELERATION = 70
+		MAX_SPEED = 190
+		MAX_JUMP_HEIGHT = -350
+		MIN_JUMP_HEIGHT = -150
+	else:
+		$CollisionShape2D.disabled=true
+		GRAVITY = 0
+		ACCELERATION = 0
+		MAX_SPEED = 0
+		MAX_JUMP_HEIGHT = 0
+		MIN_JUMP_HEIGHT = 0
+		
+
+func restaurar_vida(posicion, n_vidas):
+	vidas=n_vidas
+	mover_a(posicion)
+	
+func mover_cuerpo(posicion):
+	position=posicion
+
 func movimiento(estado_entrada):
 	if estado_entrada:
 		motion.y += GRAVITY
@@ -217,11 +236,13 @@ func movimiento(estado_entrada):
 		#Para movimiento derecha e izquierda
 		
 		if Input.is_action_pressed("ui_right"):
+			#print("-->")
 			$movement.flip_h=false
 			$movement.position.x=0
 			$ataque/CollisionShape2D.position.x=10.709
 			motion.x =min(motion.x+ACCELERATION, MAX_SPEED)
 		elif Input.is_action_pressed("ui_left"):
+			#print("<--")
 			$movement.flip_h=true
 			$movement.position.x=-15
 			$ataque/CollisionShape2D.position.x=-25
@@ -241,12 +262,19 @@ func movimiento(estado_entrada):
 				motion.x = lerp(motion.x, 0 , 0.05)
 		
 		#Para ataque
-		if Input.is_action_just_pressed("ui_page_up"):
+		if Input.is_action_just_pressed("ui_page_up") and can_attack:
 			emit_signal("attack")
 			if is_on_floor():
 				movimiento_Personaje(false)
 			print("ataco....")
 		
 		#Para la accion
-		if Input.is_action_just_pressed("ui_page_down"):
-			connect("action",self, "accion")
+		if Input.is_action_just_pressed("ui_page_down") :
+			transition_to(DOOR_IN)
+			#print("HIPP")
+			#accion()
+			#mover_cuerpo(Vector2(773,99))
+
+
+func _on_tiempo_de_ataque_timeout():
+	can_attack=true

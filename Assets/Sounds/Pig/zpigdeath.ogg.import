@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/zpigdeath.ogg-961ba6369e9d3070db158416f3428720.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/Pig/zpigdeath.ogg"
+dest_files=[ "res://.import/zpigdeath.ogg-961ba6369e9d3070db158416f3428720.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
