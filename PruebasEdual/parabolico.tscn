@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Sprites/01-King Human/Jump (78x58).png" type="Texture" id=2]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="." groups=[
+"objetivo",
+]]
+position = Vector2( 892, 416 )
+texture = ExtResource( 2 )
