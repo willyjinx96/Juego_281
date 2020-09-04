@@ -9,7 +9,9 @@ var saveMoveX
 var estaAtacando=false
 var nombreJugador="Rey_p1"
 
-enum {CAMINAR,ATACAR,PARADO,CAIDA,DANIO}
+export var vida=3
+
+enum {CAMINAR,ATACAR,PARADO,CAIDA,DANIO,MUERTE}
 var estado
 var estadoAux
 var animacion_Actual
@@ -35,6 +37,9 @@ func cambiarTransicion_a(nuevo_estado):
 		DANIO:
 			nueva_animacion="danio"
 			guardarMovimientoEnX()
+		MUERTE:
+			nueva_animacion="muerte"
+			moverX=Vector2(0,0)
 
 
 func guardarMovimientoEnX():
@@ -76,7 +81,7 @@ func _physics_process(delta):
 		var nombreObjetoFrente=deteccionFrente.get("name")
 		if nombreObjetoFrente=="castillo" and estado!=DANIO:
 			cambiarDireccionMovimiento()
-		elif nombreObjetoFrente==nombreJugador and estado!=ATACAR and animacion_Actual!="atacar" and !estaAtacando:
+		elif nombreObjetoFrente==nombreJugador and estado!=ATACAR and animacion_Actual!="atacar" and !estaAtacando and vida>0:
 			cambiarTransicion_a(ATACAR)
 			estaAtacando=true
 			$caminar.stop()
@@ -100,7 +105,7 @@ func _physics_process(delta):
 
 
 func hacerDanio(var ejeX)->void:
-	if estado!=DANIO:
+	if estado!=DANIO and vida>0:
 		$caminar.stop()
 		$duracionParado.stop()
 		estaAtacando=false
@@ -110,6 +115,9 @@ func hacerDanio(var ejeX)->void:
 		var sentido=direccion/abs(direccion)
 		moverX=Vector2(sentido,0)
 		saveMoveX=-1*moverX
+		$pighurt.play()
+		vida-=1
+		
 		
 	
 	
@@ -177,6 +185,7 @@ func _on_hitbox_body_entered(body):
 	body.damage()
 
 
+
 func _on_AnimatedSprite_animation_finished():
 	
 	match estado:
@@ -185,7 +194,19 @@ func _on_AnimatedSprite_animation_finished():
 			estaAtacando=false
 			$hitbox/CollisionShape2D.set_deferred("disabled",true)
 			$duracionParado.start(rand_range(3,5))
+			
 		DANIO:
-			cambiarTransicion_a(CAMINAR)
-			$caminar.start(rand_range(8,14))
-			ajustarFrente()
+			if vida>0:
+				cambiarTransicion_a(CAMINAR)
+				$caminar.start(rand_range(8,14))
+				$pighurt.stop()
+				ajustarFrente()
+			else:
+				cambiarTransicion_a(MUERTE)
+				$pighurt.stop()
+		MUERTE:
+			$pighurt.stop()
+			queue_free()
+			
+
+
