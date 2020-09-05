@@ -18,6 +18,10 @@ _global_script_class_icons={
 config/name="Juego_281"
 config/icon="res://icon.png"
 
+[autoload]
+
+Jugador="*res://Recursos/Propiedades_Jugador.gd"
+
 [importer_defaults]
 
 texture={

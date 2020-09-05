@@ -22,7 +22,7 @@ var can_attack = true
 
 var can_action = false
 #signal action#KEY_X
-#var action_released =false
+var action_released =false
 
 var animation_finished=0
 
@@ -98,9 +98,12 @@ func _on_movement_animation_finished():
 		movimiento_Personaje(true)
 	if $movement.animation == "door_in":
 		animation_finished = 3
-		#action_released=false
+		action_released=false
 	if $movement.animation == "door_out":
 		animation_finished=4
+		cambiar_estado(true)
+		movimiento(true)
+		movimiento_Personaje(true)
 	if $movement.animation=="dead":
 		#estado_fisicas(false)
 		pausar()
@@ -159,14 +162,14 @@ func estados():
 		transition_to(FALL)
 	
 #estados accion
-#	if state in [IDLE, RUN] and action_released:
-#		transition_to(DOOR_IN)
-#	if state == DOOR_IN and animation_finished==3:
-#		transition_to(DOOR_OUT)
-#	if state == DOOR_OUT and animation_finished==4:
-#		transition_to(IDLE)
-#	if state == DOOR_OUT and animation_finished==4 and running:
-#		transition_to(RUN)
+	if state in [IDLE, RUN] and action_released:
+		transition_to(DOOR_IN)
+	if state == DOOR_IN and animation_finished==3:
+		transition_to(DOOR_OUT)
+	if state == DOOR_OUT and animation_finished==4:
+		transition_to(IDLE)
+	if state == DOOR_OUT and animation_finished==4 and running:
+		transition_to(RUN)
 
 #estados danio
 	if state in [IDLE, RUN, JUMP, FALL] and hurt:
@@ -269,8 +272,13 @@ func movimiento(estado_entrada):
 			print("ataco....")
 		
 		#Para la accion
-		if Input.is_action_just_pressed("ui_page_down") :
-			transition_to(DOOR_IN)
+		if Input.is_action_just_pressed("ui_page_down") and Jugador.can_action:
+			#transition_to(DOOR_IN)
+			action_released=true
+			cambiar_estado(false)
+			movimiento(false)
+			movimiento_Personaje(false)
+			#Jugador.can_action=true
 			#print("HIPP")
 			#accion()
 			#mover_cuerpo(Vector2(773,99))

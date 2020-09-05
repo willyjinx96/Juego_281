@@ -10,7 +10,7 @@ func _ready():
 	transtion_to(IDLE)
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("ui_page_down"):
+	if Input.is_action_just_pressed("ui_page_down") :
 		$CollisionShape2D.disabled=false
 
 func transtion_to(new_state):
@@ -34,10 +34,12 @@ func estado():
 
 
 func _on_door_body_entered(body):
+	Jugador.can_action = true
 	$AnimatedSprite.play("openning")
 	pass # Replace with function body.
 
 
 func _on_door_body_exited(body):
-	$AnimatedSprite.play("clossing")
-	#$CollisionShape2D.disabled=true
+	Jugador.can_action=false
+	#$AnimatedSprite.play("clossing")
+	$CollisionShape2D.disabled=true
