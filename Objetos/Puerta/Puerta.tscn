@@ -66,7 +66,7 @@ extents = Vector2( 3.20264, 8.99702 )
 collision_layer = 2147483712
 script = ExtResource( 4 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="estados" type="AnimatedSprite" parent="."]
 frames = SubResource( 10 )
 animation = "clossing"
 frame = 2
@@ -75,6 +75,6 @@ playing = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.594604, 14.1218 )
 shape = SubResource( 11 )
-disabled = true
 [connection signal="body_entered" from="." to="." method="_on_door_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_door_body_exited"]
+[connection signal="animation_finished" from="estados" to="." method="_on_estados_animation_finished"]
