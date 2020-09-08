@@ -8,10 +8,12 @@ var moverX=Vector2(-1,0)
 var saveMoveX
 var estaAtacando=false
 var nombreJugador="Rey_p1"
+var direccionJugador=Vector2(0,0)
 
 export var vida=3
+export var distanciaVision=100
 
-enum {CAMINAR,ATACAR,PARADO,CAIDA,DANIO,MUERTE}
+enum {CAMINAR,ATACAR,PARADO,CAIDA,DANIO,MUERTE,CORRER}
 var estado
 var estadoAux
 var animacion_Actual
@@ -24,6 +26,7 @@ func cambiarTransicion_a(nuevo_estado):
 	match estado:
 		PARADO:
 			nueva_animacion="parado"
+			velocidad_movimiento=50
 			guardarMovimientoEnX()
 		CAMINAR:
 			nueva_animacion="caminar"
@@ -40,6 +43,10 @@ func cambiarTransicion_a(nuevo_estado):
 		MUERTE:
 			nueva_animacion="muerte"
 			moverX=Vector2(0,0)
+		CORRER:
+			nueva_animacion="correr"
+			guardarMovimientoEnX()
+			velocidad_movimiento=100
 
 
 func guardarMovimientoEnX():
@@ -69,28 +76,51 @@ func _physics_process(delta):
 	var posicion=Vector2()
 	posicion+=Vector2(0,1)
 	posicion.y=posicion.y*gravedad
+	
+	var vect=get_node("../Rey_p1").global_position
+	var estadoEspacial=get_world_2d().direct_space_state
+	var posicion2=global_position
+	var resultadoRayo=estadoEspacial.intersect_ray(posicion2,vect,[self])
+	
+	var dirX=vect.x-posicion2.x
+	var dirY=posicion2.y-vect.y
+	var distancia=sqrt(pow(dirX,2)+pow(dirY,2))#distancia entre el esta escena y el jugador
+	var objeto=resultadoRayo.get("collider")#el objeto que choca primero
+	var sentido=dirX/abs(dirX)#en que direccion esta el jugador
 	#--------------------------------------------
 	#----------procesos cambiantes---------------
 	
 	var deteccionFrente=$detectarFrente.get_collider()
 	var deteccionPiso=$detectarFrente/detectarPiso.get_collider()
 	var esEnPiso=is_on_floor()
+	
+
 	#print(abs(get_node("../Rey_p1").position-global_position))
 	
 	if deteccionFrente!=null and esEnPiso and estado!=DANIO:
-		var nombreObjetoFrente=deteccionFrente.get("name")
+		var nombreObjetoFrente=deteccionFrente.get("name") 
+		var vaAtacar=nombreObjetoFrente==nombreJugador and estado!=ATACAR and animacion_Actual!="atacar" and !estaAtacando and vida>0
+		
 		if nombreObjetoFrente=="castillo" and estado!=DANIO:
 			cambiarDireccionMovimiento()
-		elif nombreObjetoFrente==nombreJugador and estado!=ATACAR and animacion_Actual!="atacar" and !estaAtacando and vida>0:
+		elif vaAtacar:
 			cambiarTransicion_a(ATACAR)
 			estaAtacando=true
 			$caminar.stop()
 			$duracionParado.stop()
+		
+			
 	elif deteccionPiso==null and esEnPiso:
 		cambiarDireccionMovimiento()
 	elif !esEnPiso and moverX!=saveMoveX and estado!=DANIO:
 		cambiarTransicion_a(CAIDA)
+	elif esEnPiso and deteccionPiso!=null and estado==CAIDA:
+		
+		moverX=direccionJugador
+		cambiarTransicion_a(PARADO)
 	
+	if distancia<=distanciaVision and objeto!=null and (estado==PARADO or estado==CAMINAR or estado==CORRER):
+		launchRay(distancia,objeto,sentido)
 	
 	if estado==ATACAR:
 		golpeandoJugador()
@@ -139,14 +169,29 @@ func ajustarFrente():
 		$hitbox.position.x=-9
 	
 
-func launchRay(var vect):
-	var estadoEspacial=get_world_2d().direct_space_state
+
+func launchRay(var distancia, var objeto,var sentido):
+	direccionJugador=Vector2(sentido,0)
 	
-	var resultadoRayo=estadoEspacial.intersect_ray(global_position,vect,[self])
 	
+	if objeto.name==nombreJugador and distancia<distanciaVision:
+		cambiarTransicion_a(CORRER)
+		velocidad_movimiento=100
+		moverX=direccionJugador
+		ajustarFrente()
+		$AnimatedSprite2.show()
+		$AnimatedSprite2.play("sorprendido")
+	elif velocidad_movimiento>=100:
+		cambiarTransicion_a(PARADO)
+		$duracionParado.start(rand_range(3,5))
+		ajustarFrente()
 	#if str(resultadoRayo)
 
 
+
+func perseguirJugador(var distancia):
+	cambiarTransicion_a(CORRER)
+	
 
 func _on_caminar_timeout():
 	cambiarTransicion_a(PARADO)
@@ -210,3 +255,7 @@ func _on_AnimatedSprite_animation_finished():
 			
 
 
+
+
+func _on_AnimatedSprite2_animation_finished():
+	$AnimatedSprite2.hide()
