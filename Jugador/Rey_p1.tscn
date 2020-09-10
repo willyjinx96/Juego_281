@@ -1,17 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Recursos/movement.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Jugador/Rey_p1.gd" type="Script" id=2]
-[ext_resource path="res://Recursos/Fuentes/Masaaki-Regular.otf" type="DynamicFontData" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 height = 7.97741
 
-[sub_resource type="DynamicFont" id=2]
-size = 13
-font_data = ExtResource( 3 )
-
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=2]
 radius = 28.8497
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
@@ -22,8 +17,8 @@ vidas = 3
 
 [node name="movement" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-animation = "joy"
-frame = 3
+animation = "door_out"
+frame = 7
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -40,18 +35,6 @@ drag_margin_v_enabled = true
 smoothing_enabled = true
 smoothing_speed = 15.0
 
-[node name="Label" type="Label" parent="Camera2D"]
-margin_left = -241.329
-margin_top = -141.43
-margin_right = -182.329
-margin_bottom = -121.43
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.698039, 0.0784314, 0.0784314, 1 )
-text = "VIDAS x3"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="ataque" type="Area2D" parent="."]
 input_pickable = false
 collision_layer = 0
@@ -62,7 +45,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ataque"]
 position = Vector2( 10.119, 0 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 disabled = true
 
 [node name="tiempo_de_ataque" type="Timer" parent="."]

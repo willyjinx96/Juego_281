@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 #maquina de estados (Animacion)
-enum {IDLE, RUN, JUMP, FALL, GROUND, ATTACK, HIT, DEAD, DOOR_IN, DOOR_OUT}
+enum {IDLE, RUN, JUMP, FALL, GROUND, ATTACK, HIT, DEAD, DOOR_IN, DOOR_OUT,INVISIBLE}
 var state
 var current_animation
 var new_animation
@@ -30,9 +30,10 @@ var animation_finished=0
 signal hit
 var hurt =false
 
+var teleport = false
 #variables de vida
 
-export var vidas = 6000
+export var vidas = 0
 #var dead =false
 var moverse
 var input_state
@@ -44,20 +45,21 @@ func _ready():
 	estado_fisicas(true)
 	
 func _physics_process(delta):
-	cambiar_label()
-	estados()
-	movimiento(input_state)
+	estados()#Cambia de estados de la animacion
+	movimiento(input_state)#habilita o dehabilita la entrada por teclado
 	if vidas <=0:
 		can_attack=false
-		estado_fisicas(false)
-		movimiento_Personaje(false)
+		estado_fisicas(false)#Habilta/deshabilita la colision y gravedad del cuerpo
+		movimiento_Personaje(false)#habilita/deshabilita el move and slide
 		#cambiar_estado(false)
 	animation_finished=0
 	if moverse:
-		mover_a(motion)
-	if hurt:
-		retroceso()
-
+		mover_a(motion)#mueve el cuerpo a una determinada posicion
+	elif hurt:
+		retroceso()#hace un empuje hacia atras
+	elif teleport:
+		#teletransportar_a(Vector2(999,431))
+		teletransportar_a(Puerta.destino)
 
 func transition_to(new_state):
 	state=new_state
@@ -83,6 +85,8 @@ func transition_to(new_state):
 			new_animation ="door_in"
 		DOOR_OUT:
 			new_animation ="door_out"
+		INVISIBLE:
+			new_animation = "invisible"
 	
 func _on_movement_animation_finished():
 	if $movement.animation== "attack":
@@ -99,14 +103,21 @@ func _on_movement_animation_finished():
 	if $movement.animation == "door_in":
 		animation_finished = 3
 		action_released=false
+		teleport = true
 	if $movement.animation == "door_out":
 		animation_finished=4
 		cambiar_estado(true)
 		movimiento(true)
 		movimiento_Personaje(true)
+		teleport = false
+		estado_fisicas(true)
 	if $movement.animation=="dead":
 		#estado_fisicas(false)
 		pausar()
+	if $movement.animation == "invisible":
+		animation_finished = 5
+		teleport = false
+
 
 func _on_KinematicBody2D_attack():
 	can_attack=false
@@ -165,11 +176,13 @@ func estados():
 	if state in [IDLE, RUN] and action_released:
 		transition_to(DOOR_IN)
 	if state == DOOR_IN and animation_finished==3:
+		transition_to(INVISIBLE)
+	if state == INVISIBLE and animation_finished ==5:
 		transition_to(DOOR_OUT)
 	if state == DOOR_OUT and animation_finished==4:
 		transition_to(IDLE)
-	if state == DOOR_OUT and animation_finished==4 and running:
-		transition_to(RUN)
+	#if state == DOOR_OUT and animation_finished==4 and running:
+		#transition_to(RUN)
 
 #estados danio
 	if state in [IDLE, RUN, JUMP, FALL] and hurt:
@@ -183,11 +196,7 @@ func estados():
 
 #WILLY ESTO HICE PARA PROBAR EL LLAMADO DEL CERDITO AL HACERLE DAÑO :V
 func _on_ataque_body_entered(body):
-	
 	body.hacerDanio(global_position.x)
-
-func cambiar_label():
-	$Camera2D/Label.text = ("VIDAS x"+str(vidas))
 
 func accion():
 	print("accion...")
@@ -199,7 +208,7 @@ func cambiar_estado(estado):
 	input_state=estado
 
 func mover_a(posicion):
-	motion= move_and_slide(posicion,UP)
+	motion = move_and_slide(posicion,UP)
 
 func retroceso():
 	if $movement.flip_h==true:
@@ -269,10 +278,10 @@ func movimiento(estado_entrada):
 			emit_signal("attack")
 			if is_on_floor():
 				movimiento_Personaje(false)
-			print("ataco....")
+			#print("ataco....")
 		
 		#Para la accion
-		if Input.is_action_just_pressed("ui_page_down") and Jugador.can_action:
+		if Input.is_action_just_pressed("ui_page_down") and Jugador.can_action and is_on_floor():
 			#transition_to(DOOR_IN)
 			action_released=true
 			cambiar_estado(false)
@@ -282,7 +291,17 @@ func movimiento(estado_entrada):
 			#print("HIPP")
 			#accion()
 			#mover_cuerpo(Vector2(773,99))
+		#if Input.is_action_pressed("ui_down"):
+			#teleport = true
 
 
 func _on_tiempo_de_ataque_timeout():
 	can_attack=true
+	
+func teletransportar_a(posicion):
+	#mover_a(posicion)
+	#movimiento_Personaje(true)
+	global_position = posicion
+	#estado_fisicas(false)
+	#$movement.play("invisible")
+	pass

@@ -66,6 +66,7 @@ position = Vector2( 767, 72 )
 [node name="queen" type="AnimatedSprite" parent="."]
 position = Vector2( 929.453, 79.2353 )
 frames = SubResource( 7 )
+frame = 3
 playing = true
 
 [node name="Rey_p1" parent="." instance=ExtResource( 3 )]

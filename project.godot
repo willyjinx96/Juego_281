@@ -21,6 +21,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Jugador="*res://Recursos/Propiedades_Jugador.gd"
+Puerta="*res://Recursos/Propiedades_puerta.gd"
 
 [importer_defaults]
 
