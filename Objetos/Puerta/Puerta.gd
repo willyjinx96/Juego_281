@@ -14,14 +14,14 @@ enum {IDLE, OPENNING, CLOSSING}
 
 func _ready():
 	transtion_to(IDLE)
-	pass
-
-func _physics_process(delta):
 	var x =global_position.x + 7
 	var y =global_position.y +14
 	Puerta.add_puerta(cicuito, Vector2(x,y), source)
 	pass
-#	if Input.is_action_pressed("ui_page_down") and action:
+
+func _physics_process(delta):
+	if Input.is_action_pressed("ui_page_down") and action:
+		Puerta.enviar_direccion(cicuito, source)
 #		#action = true
 #		#$estados.play("openning")
 #		transtion_to(OPENNING)
@@ -54,25 +54,16 @@ func estado():
 		transtion_to(IDLE)
 
 func _on_door_body_entered(body):
+	#Puerta.enviar_direccion(cicuito, source)
 	$estados.play("openning")
-	Puerta.enviar_direccion(cicuito)
 	Jugador.can_action = true
 	action = true
-	#if vuelta %2==0 and ida == vuelta-1:
-		#Puerta.puerta_destino = global_position
-	pass # Replace with function body.
 
 
 func _on_door_body_exited(body):
-	var x =global_position.x + 7
-	var y =global_position.y +14
-	Puerta.add_puerta(cicuito, Vector2(x,y), not source)
-	source = false
 	Jugador.can_action=false
 	action =false
 	$estados.play("clossing")
-	#transtion_to(CLOSSING)
-	#$CollisionShape2D.disabled=true
 
 
 func _on_estados_animation_finished():
