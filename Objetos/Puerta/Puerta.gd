@@ -14,14 +14,15 @@ enum {IDLE, OPENNING, CLOSSING}
 
 func _ready():
 	transtion_to(IDLE)
-	var x =global_position.x + 7
-	var y =global_position.y +14
-	Puerta.add_puerta(cicuito, Vector2(x,y), source)
+	Puerta.add_puerta(cicuito, global_position+Vector2(7,14), source)
 	pass
 
 func _physics_process(delta):
 	if Input.is_action_pressed("ui_page_down") and action:
-		Puerta.enviar_direccion(cicuito, source)
+		if cicuito !=0:
+			Puerta.enviar_direccion(cicuito, source)
+		else:
+			print("Otro destino :v")
 #		#action = true
 #		#$estados.play("openning")
 #		transtion_to(OPENNING)
@@ -62,7 +63,7 @@ func _on_door_body_entered(body):
 
 func _on_door_body_exited(body):
 	Jugador.can_action=false
-	action =false
+	action = false
 	$estados.play("clossing")
 
 
@@ -71,4 +72,5 @@ func _on_estados_animation_finished():
 		animation_finished = 1
 	elif $estados.animation == "clossing":
 		animation_finished = 2
+		$estados.play("idle")
 	pass # Replace with function body.

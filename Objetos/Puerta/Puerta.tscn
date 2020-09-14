@@ -6,61 +6,61 @@
 [ext_resource path="res://Objetos/Puerta/Puerta.gd" type="Script" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 46, 56 )
 
 [sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 46, 56 )
+atlas = ExtResource( 3 )
+region = Rect2( 46, 0, 46, 56 )
 
 [sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 1 )
-region = Rect2( 46, 0, 46, 56 )
+atlas = ExtResource( 3 )
+region = Rect2( 92, 0, 46, 56 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
-region = Rect2( 92, 0, 46, 56 )
+region = Rect2( 0, 0, 46, 56 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
-region = Rect2( 138, 0, 46, 56 )
+region = Rect2( 46, 0, 46, 56 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
-region = Rect2( 184, 0, 46, 56 )
+region = Rect2( 92, 0, 46, 56 )
 
 [sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 46, 56 )
+atlas = ExtResource( 1 )
+region = Rect2( 138, 0, 46, 56 )
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 3 )
-region = Rect2( 46, 0, 46, 56 )
+atlas = ExtResource( 1 )
+region = Rect2( 184, 0, 46, 56 )
 
 [sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 3 )
-region = Rect2( 92, 0, 46, 56 )
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 46, 56 )
 
 [sub_resource type="SpriteFrames" id=10]
 animations = [ {
-"frames": [ SubResource( 1 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ],
 "loop": false,
-"name": "idle",
-"speed": 5.0
+"name": "clossing",
+"speed": 10.0
 }, {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": false,
 "name": "openning",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"frames": [ SubResource( 9 ) ],
 "loop": false,
-"name": "clossing",
-"speed": 10.0
+"name": "idle",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 3.20264, 8.99702 )
+extents = Vector2( 9.88225, 10.977 )
 
 [node name="door" type="Area2D"]
 collision_layer = 2147483712

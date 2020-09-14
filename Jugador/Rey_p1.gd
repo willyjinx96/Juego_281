@@ -27,14 +27,12 @@ var action_released =false
 var animation_finished=0
 
 #variables danio
-signal hit
 var hurt =false
 
 var teleport = false
 #variables de vida
 
 export var vidas = 0
-#var dead =false
 var moverse
 var input_state
 
@@ -43,11 +41,12 @@ func _ready():
 	movimiento_Personaje(true)
 	transition_to(IDLE)
 	estado_fisicas(true)
+	#Jugador.cambiar_vida(vidas)
 	
 func _physics_process(delta):
 	estados()#Cambia de estados de la animacion
 	movimiento(input_state)#habilita o dehabilita la entrada por teclado
-	if vidas <=0:
+	if Jugador.vidas <=0:
 		can_attack=false
 		estado_fisicas(false)#Habilta/deshabilita la colision y gravedad del cuerpo
 		movimiento_Personaje(false)#habilita/deshabilita el move and slide
@@ -56,10 +55,12 @@ func _physics_process(delta):
 	if moverse:
 		mover_a(motion)#mueve el cuerpo a una determinada posicion
 	elif hurt:
+		Jugador.invulnerable = true
 		retroceso()#hace un empuje hacia atras
 	elif teleport:
 		#teletransportar_a(Vector2(999,431))
 		teletransportar_a(Puerta.destino)
+		#$mover.play("puertas")
 
 func transition_to(new_state):
 	state=new_state
@@ -100,6 +101,7 @@ func _on_movement_animation_finished():
 		motion.x=0
 		cambiar_estado(true)
 		movimiento_Personaje(true)
+		Jugador.invulnerable = false
 	if $movement.animation == "door_in":
 		animation_finished = 3
 		action_released=false
@@ -111,6 +113,7 @@ func _on_movement_animation_finished():
 		movimiento_Personaje(true)
 		teleport = false
 		estado_fisicas(true)
+		Jugador.invulnerable = false
 	if $movement.animation=="dead":
 		#estado_fisicas(false)
 		pausar()
@@ -124,15 +127,19 @@ func _on_KinematicBody2D_attack():
 	$tiempo_de_ataque.start()
 	$ataque/CollisionShape2D.disabled=false
 	attacking=true
+	Jugador.emit_signal("attack")
 
 func pausar():
 	get_tree().paused=true
 
 func damage():
-	vidas -=1
-	hurt =true
-	cambiar_estado(false)
-	movimiento_Personaje(false)
+	if not Jugador.invulnerable:
+		Jugador.vidas -= 1
+		
+		hurt = true
+		cambiar_estado(false)
+		movimiento_Personaje(false)
+		Jugador.emit_signal("hit")
 
 func estados():
 	if current_animation != new_animation:
@@ -191,15 +198,12 @@ func estados():
 		transition_to(IDLE)
 	if state==HIT and !is_on_floor() and animation_finished==2:
 		transition_to(FALL)
-	if state in [HIT,IDLE,JUMP,FALL] and vidas<=0 and animation_finished==2:
+	if state in [HIT,IDLE,JUMP,FALL] and Jugador.vidas<=0 and animation_finished==2:
 		transition_to(DEAD)
 
 #WILLY ESTO HICE PARA PROBAR EL LLAMADO DEL CERDITO AL HACERLE DAÑO :V
 func _on_ataque_body_entered(body):
 	body.hacerDanio(global_position.x)
-
-func accion():
-	print("accion...")
 
 func movimiento_Personaje(estado):
 	moverse=estado
@@ -212,9 +216,9 @@ func mover_a(posicion):
 
 func retroceso():
 	if $movement.flip_h==true:
-		mover_a(Vector2(70,0))
+		mover_a(Vector2(100,0))
 	else:
-		mover_a(Vector2(-70,0))
+		mover_a(Vector2(-100,0))
 
 func estado_fisicas(estado):
 	if estado:
@@ -232,14 +236,11 @@ func estado_fisicas(estado):
 		MAX_SPEED = 0
 		MAX_JUMP_HEIGHT = 0
 		MIN_JUMP_HEIGHT = 0
-		
 
 func restaurar_vida(posicion, n_vidas):
-	vidas=n_vidas
+	Jugador.vidas=n_vidas
 	mover_a(posicion)
-	
-func mover_cuerpo(posicion):
-	position=posicion
+
 
 func movimiento(estado_entrada):
 	if estado_entrada:
@@ -275,6 +276,7 @@ func movimiento(estado_entrada):
 		
 		#Para ataque
 		if Input.is_action_just_pressed("ui_page_up") and can_attack:
+			Jugador.can_action = false
 			emit_signal("attack")
 			if is_on_floor():
 				movimiento_Personaje(false)
@@ -283,16 +285,12 @@ func movimiento(estado_entrada):
 		#Para la accion
 		if Input.is_action_just_pressed("ui_page_down") and Jugador.can_action and is_on_floor():
 			#transition_to(DOOR_IN)
+			Jugador.invulnerable = true
 			action_released=true
 			cambiar_estado(false)
 			movimiento(false)
 			movimiento_Personaje(false)
-			#Jugador.can_action=true
-			#print("HIPP")
-			#accion()
-			#mover_cuerpo(Vector2(773,99))
-		#if Input.is_action_pressed("ui_down"):
-			#teleport = true
+			teletransportar_a(Puerta.origen)
 
 
 func _on_tiempo_de_ataque_timeout():
