@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Sprites/17-GUI/Prefabs/2.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/17-GUI/Prefabs/7.png" type="Texture" id=2]
+[ext_resource path="res://Recursos/Fuentes/PressStart2P-Regular.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 3 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 509.844, 297.258 )
+scale = Vector2( 3.45863, 3.99764 )
+texture = ExtResource( 1 )
+
+[node name="7" type="Sprite" parent="."]
+position = Vector2( 511.503, 233.178 )
+scale = Vector2( 5.57754, 3.57816 )
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="7"]
+margin_left = -11.9716
+margin_top = -10.0476
+margin_right = 114.028
+margin_bottom = 81.9524
+rect_scale = Vector2( 0.2, 0.2 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.247059, 0.219608, 0.317647, 1 )
+text = "hola texto de prueba"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

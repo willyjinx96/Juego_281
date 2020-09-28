@@ -5,6 +5,14 @@ enum {IDLE, RUN, JUMP, FALL, GROUND, ATTACK, HIT, DEAD, DOOR_IN, DOOR_OUT,INVISI
 var state
 var current_animation
 var new_animation
+var n_sfx
+
+var audio_file=["res://Assets/Sounds/Fx_rey/hard-footstep3.wav",
+"res://Assets/Sounds/Fx_rey/hard-footstep2.wav",
+"res://Assets/Sounds/Fx_rey/jump_1.ogg",
+"res://Assets/Sounds/Fx_rey/hurt_1.ogg",
+"res://Assets/Sounds/Fx_rey/attack.ogg",
+"res://Assets/Sounds/Fx_rey/dead.ogg"]
 
 #fisica de movimientos
 const UP = Vector2(0,-1)
@@ -68,27 +76,37 @@ func transition_to(new_state):
 	match state:
 		IDLE:
 			new_animation ="idle"
+			n_sfx=-1
 		RUN:
 			new_animation ="run"
+			n_sfx=1
 		JUMP:
 			new_animation ="jump"
+			n_sfx=2
 		FALL:
 			new_animation ="fall"
+			n_sfx=-1
 		GROUND:
 			new_animation="ground"
+			n_sfx=-1
 		ATTACK:
 			new_animation ="attack"
+			n_sfx=4
 		HIT:
 			new_animation ="hit"
+			n_sfx=3
 		DEAD:
 			new_animation ="dead"
+			n_sfx=5
 		DOOR_IN:
 			new_animation ="door_in"
+			n_sfx=-1
 		DOOR_OUT:
 			new_animation ="door_out"
+			n_sfx=-1
 		INVISIBLE:
 			new_animation = "invisible"
-	
+			n_sfx=-1
 func _on_movement_animation_finished():
 	if $movement.animation== "attack":
 		animation_finished=1
@@ -115,8 +133,9 @@ func _on_movement_animation_finished():
 		estado_fisicas(true)
 		Jugador.invulnerable = false
 	if $movement.animation=="dead":
+		movimiento(false)
 		#estado_fisicas(false)
-		pausar()
+		#pausar()
 	if $movement.animation == "invisible":
 		animation_finished = 5
 		teleport = false
@@ -145,6 +164,11 @@ func estados():
 	if current_animation != new_animation:
 		current_animation= new_animation
 		$movement.play(current_animation)
+		$sfx/AudioStreamPlayer.stop()
+		if n_sfx !=-1:
+			var sfx=load(audio_file[n_sfx])
+			$sfx/AudioStreamPlayer.stream =sfx
+			$sfx/AudioStreamPlayer.play()
 
 #estados movimiento
 	var running = (Input.is_action_pressed("ui_right") or Input.is_action_pressed("ui_left"))

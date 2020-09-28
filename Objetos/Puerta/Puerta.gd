@@ -6,6 +6,7 @@ var new_animation
 
 var action = false
 var animation_finished = 0
+var audio_file = ["res://Assets/Sounds/fx_door/qubodup-DoorOpen03.ogg","res://Assets/Sounds/fx_door/qubodup-DoorClose06.ogg"]
 
 export var source = true
 export var cicuito = 0
@@ -57,6 +58,7 @@ func estado():
 func _on_door_body_entered(body):
 	#Puerta.enviar_direccion(cicuito, source)
 	$estados.play("openning")
+	play_fx(0)
 	Jugador.can_action = true
 	action = true
 
@@ -65,6 +67,7 @@ func _on_door_body_exited(body):
 	Jugador.can_action=false
 	action = false
 	$estados.play("clossing")
+	play_fx(1)
 
 
 func _on_estados_animation_finished():
@@ -74,3 +77,8 @@ func _on_estados_animation_finished():
 		animation_finished = 2
 		$estados.play("idle")
 	pass # Replace with function body.
+
+func play_fx(n):
+	var sfx = load(audio_file[n])
+	$fx.stream = sfx
+	$fx.play()

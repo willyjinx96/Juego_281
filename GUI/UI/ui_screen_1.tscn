@@ -8,5 +8,5 @@
 [node name="barra_de_vidas" parent="." instance=ExtResource( 1 )]
 
 [node name="martillo_ataque" parent="." instance=ExtResource( 2 )]
-position = Vector2( 947.736, 541.945 )
+position = Vector2( 919.704, 513.913 )
 scale = Vector2( 3, 3 )

@@ -8,14 +8,9 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "Node",
-"class": "SoundManagerModule",
-"language": "GDScript",
-"path": "res://addons/sound_manager/module/internal_scripts/SoundManager_config.gd"
-} ]
+_global_script_classes=[  ]
 _global_script_class_icons={
-"SoundManagerModule": ""
+
 }
 
 [application]
@@ -27,6 +22,10 @@ config/icon="res://icon.png"
 
 Jugador="*res://Recursos/Propiedades_Jugador.gd"
 Puerta="*res://Recursos/Propiedades_puerta.gd"
+
+[display]
+
+window/size/resizable=false
 
 [importer_defaults]
 
