@@ -1,16 +1,6 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Assets/Sprites/12-Live and Coins/Small Heart Idle (18x14).png" type="Texture" id=1]
-[ext_resource path="res://Assets/Sprites/12-Live and Coins/Small Heart Hit (18x14).png" type="Texture" id=2]
-[ext_resource path="res://GUI/UI/Barra_vidas/corazon_barra.gd" type="Script" id=3]
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 18, 14 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 2 )
-region = Rect2( 18, 0, 18, 14 )
+[ext_resource path="res://Assets/Sprites/12-Live and Coins/Small Diamond (18x14).png" type="Texture" id=1]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -46,21 +36,13 @@ region = Rect2( 126, 0, 18, 14 )
 
 [sub_resource type="SpriteFrames" id=9]
 animations = [ {
-"frames": [ SubResource( 10 ), SubResource( 11 ) ],
-"loop": false,
-"name": "heart_lost",
-"speed": 10.0
-}, {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
-"name": "girando",
+"name": "idle",
 "speed": 10.0
 } ]
 
-[node name="corazon" type="AnimatedSprite"]
+[node name="diamante" type="AnimatedSprite"]
 frames = SubResource( 9 )
-animation = "girando"
-frame = 1
+animation = "idle"
 playing = true
-script = ExtResource( 3 )
-[connection signal="animation_finished" from="." to="." method="_on_corazon_animation_finished"]

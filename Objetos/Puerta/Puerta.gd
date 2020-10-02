@@ -11,6 +11,8 @@ var audio_file = ["res://Assets/Sounds/fx_door/qubodup-DoorOpen03.ogg","res://As
 export var source = true
 export var cicuito = 0
 
+export var key = false
+
 enum {IDLE, OPENNING, CLOSSING}
 
 func _ready():

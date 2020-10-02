@@ -77,7 +77,7 @@ func _physics_process(delta):
 	posicion+=Vector2(0,1)
 	posicion.y=posicion.y*gravedad
 	
-	var vect=get_node("../Rey_p1").global_position
+	var vect=get_parent().get_node("../Rey_p1").global_position
 	var estadoEspacial=get_world_2d().direct_space_state
 	var posicion2=global_position
 	var resultadoRayo=estadoEspacial.intersect_ray(posicion2,vect,[self])

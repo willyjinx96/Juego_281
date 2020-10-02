@@ -1,27 +1,28 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Assets/Sprites/01-King Human/hammer.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/hammer_cooldown.png" type="Texture" id=1]
 [ext_resource path="res://Objetos/Martillo/martillo.gd" type="Script" id=2]
 
 [sub_resource type="Animation" id=1]
 resource_name = "recarga"
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 2
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 0.247059, 0.219608, 0.317647, 1 ), Color( 1, 1, 1, 1 ) ]
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
 }
 
 [node name="martillo_ataque" type="Sprite"]
 rotation = -0.785398
 texture = ExtResource( 1 )
-flip_h = true
+hframes = 11
+frame = 10
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

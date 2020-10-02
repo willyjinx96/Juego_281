@@ -134,6 +134,7 @@ func _on_movement_animation_finished():
 		Jugador.invulnerable = false
 	if $movement.animation=="dead":
 		movimiento(false)
+		motion.x=0
 		#estado_fisicas(false)
 		#pausar()
 	if $movement.animation == "invisible":
