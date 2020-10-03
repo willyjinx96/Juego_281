@@ -36,28 +36,28 @@ region = Rect2( 108, 0, 18, 14 )
 atlas = ExtResource( 1 )
 region = Rect2( 126, 0, 18, 14 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 18, 14 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 3 )
 region = Rect2( 18, 0, 18, 14 )
 
-[sub_resource type="SpriteFrames" id=9]
+[sub_resource type="SpriteFrames" id=11]
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
 "name": "idle",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 11 ), SubResource( 12 ) ],
+"frames": [ SubResource( 9 ), SubResource( 10 ) ],
 "loop": false,
 "name": "taken",
 "speed": 10.0
 } ]
 
-[sub_resource type="CircleShape2D" id=10]
+[sub_resource type="CircleShape2D" id=12]
 radius = 6.15072
 
 [node name="corazon" type="Area2D"]
@@ -67,13 +67,13 @@ collision_mask = 17
 script = ExtResource( 2 )
 
 [node name="corazon" type="AnimatedSprite" parent="."]
-frames = SubResource( 9 )
+frames = SubResource( 11 )
 animation = "idle"
-frame = 5
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 2.06017, 0 )
-shape = SubResource( 10 )
+shape = SubResource( 12 )
 [connection signal="body_entered" from="." to="." method="_on_Area2D_body_entered"]
 [connection signal="animation_finished" from="corazon" to="." method="_on_corazon_animation_finished"]

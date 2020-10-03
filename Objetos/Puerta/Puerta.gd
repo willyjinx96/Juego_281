@@ -58,18 +58,33 @@ func estado():
 		transtion_to(IDLE)
 
 func _on_door_body_entered(body):
+	print(key)
 	#Puerta.enviar_direccion(cicuito, source)
-	$estados.play("openning")
-	play_fx(0)
-	Jugador.can_action = true
-	action = true
+	if !key:
+		$estados.play("openning")
+		play_fx(0)
+		Jugador.can_action = true
+		action = true
+	elif Jugador.keys>0:
+		$estados.play("openning")
+		play_fx(0)
+		Jugador.can_action = true
+		action = true
+		key=false
+		Jugador.keys-=1
+	else:
+		$aviso/AnimationPlayer.play("entrada")
+		
 
 
 func _on_door_body_exited(body):
-	Jugador.can_action=false
-	action = false
-	$estados.play("clossing")
-	play_fx(1)
+	if !key:
+		Jugador.can_action=false
+		action = false
+		$estados.play("clossing")
+		play_fx(1)
+	else:
+		$aviso/AnimationPlayer.play_backwards("entrada")
 
 
 func _on_estados_animation_finished():

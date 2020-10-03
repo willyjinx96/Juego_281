@@ -7,7 +7,8 @@ var invulnerable
 signal hit 
 signal attack
 signal heart_taken
-var diamnates = 0 
+var diamnates = 0
+var keys = 0
 
 func _ready():
 	pass

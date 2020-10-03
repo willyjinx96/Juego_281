@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 var accionSwIzquierda=true
 var esEnemigoDetectado=false
-var gravedad=200
+var gravedad=100
 var velocidad_movimiento=50
 var moverX=Vector2(-1,0)
 var saveMoveX
@@ -20,6 +20,16 @@ var animacion_Actual
 var nueva_animacion
 
 signal darGolpe
+
+export var corazon = false
+export var diamante = false
+export var key = false
+
+var dead =false
+
+var items=[preload("res://Objetos/items/corazon.tscn"),
+			preload("res://Objetos/items/diamante.tscn"),
+			preload("res://Objetos/items/key.tscn")]
 
 func cambiarTransicion_a(nuevo_estado):
 	estado=nuevo_estado
@@ -130,7 +140,8 @@ func _physics_process(delta):
 	posicion.x=posicion.x*velocidad_movimiento
 	
 # warning-ignore:return_value_discarded
-	move_and_slide(posicion,Vector2(0,-1))
+	if not dead:
+		move_and_slide(posicion,Vector2(0,-1))
 
 
 
@@ -247,15 +258,48 @@ func _on_AnimatedSprite_animation_finished():
 				$pighurt.stop()
 				ajustarFrente()
 			else:
+				botar_item()
 				cambiarTransicion_a(MUERTE)
 				$pighurt.stop()
 		MUERTE:
 			$pighurt.stop()
-			queue_free()
+			$AnimatedSprite.stop()
+			$CollisionShape2D.disabled=true
+			dead = true
+			$desaparicion.start()
 			
 
-
+func botar_item():
+	if corazon:
+		var item_corazon = items[0].instance()
+		#get_parent().add_child(item_corazon)
+		get_tree().get_nodes_in_group("spawner_item_cerdo")[0].add_child(item_corazon)
+		#get_tree().get_root().add_child(item_corazon)
+		item_corazon.global_position.x =self.global_position.x-20
+	if diamante:
+		var item_diamante= items[1].instance()
+		#get_parent().add_child(item_diamante)
+		get_tree().get_nodes_in_group("spawner_item_cerdo")[0].add_child(item_diamante)
+		#get_tree().get_root().add_child(item_diamante)
+		item_diamante.global_position.x =self.global_position.x
+	if key:
+		var item_key= items[2].instance()
+		#get_parent().add_child(item_key)
+		get_tree().get_nodes_in_group("spawner_item_cerdo")[0].add_child(item_key)
+		#get_tree().get_root().add_child(item_key)
+		item_key.global_position.x =self.global_position.x+20
+	pass
 
 
 func _on_AnimatedSprite2_animation_finished():
 	$AnimatedSprite2.hide()
+
+
+func _on_desaparicion_timeout():
+	queue_free()
+	pass # Replace with function body.
+
+func items(c,d,k):
+	corazon = c
+	diamante = d
+	key = k

@@ -61,6 +61,7 @@ z_index = 2
 
 [node name="CerdoEnemigo20" parent="Enemigos" instance=ExtResource( 6 )]
 position = Vector2( 647.71, -595.384 )
+diamante = true
 
 [node name="CerdoEnemigo19" parent="Enemigos" instance=ExtResource( 6 )]
 position = Vector2( 899.682, -445.836 )
@@ -68,6 +69,8 @@ position = Vector2( 899.682, -445.836 )
 [node name="CerdoEnemigo15" parent="Enemigos" instance=ExtResource( 6 )]
 position = Vector2( 645.866, 486.877 )
 distanciaVision = 80
+corazon = true
+diamante = true
 
 [node name="CerdoEnemigo14" parent="Enemigos" instance=ExtResource( 6 )]
 position = Vector2( 842.284, 392.443 )
@@ -75,10 +78,12 @@ position = Vector2( 842.284, 392.443 )
 [node name="CerdoEnemigo12" parent="Enemigos" instance=ExtResource( 6 )]
 position = Vector2( 1479, 496.56 )
 distanciaVision = 150
+diamante = true
 
 [node name="CerdoEnemigo11" parent="Enemigos" instance=ExtResource( 6 )]
 position = Vector2( 1887.46, 491.221 )
 distanciaVision = 150
+diamante = true
 
 [node name="CerdoEnemigo9" parent="Enemigos" instance=ExtResource( 6 )]
 position = Vector2( 1046.51, 165.52 )
@@ -86,21 +91,26 @@ position = Vector2( 1046.51, 165.52 )
 [node name="CerdoEnemigo8" parent="Enemigos" instance=ExtResource( 6 )]
 position = Vector2( 1469.66, 108.122 )
 distanciaVision = 200
+corazon = true
 
 [node name="CerdoEnemigo" parent="Enemigos" instance=ExtResource( 6 )]
 position = Vector2( 1285.45, -469.864 )
+diamante = true
 
 [node name="CerdoEnemigo2" parent="Enemigos" instance=ExtResource( 6 )]
 position = Vector2( 1834.07, -429.818 )
 
 [node name="CerdoEnemigo3" parent="Enemigos" instance=ExtResource( 6 )]
 position = Vector2( 1955.54, -113.461 )
+diamante = true
 
 [node name="CerdoEnemigo4" parent="Enemigos" instance=ExtResource( 6 )]
 position = Vector2( 1282.78, -129.479 )
 
 [node name="CerdoEnemigo5" parent="Enemigos" instance=ExtResource( 6 )]
 position = Vector2( 1015.81, -121.47 )
+corazon = true
+diamante = true
 
 [node name="CerdoEnemigo6" parent="Enemigos" instance=ExtResource( 6 )]
 position = Vector2( 1786.02, -245.611 )
@@ -117,15 +127,18 @@ distanciaVision = 150
 
 [node name="CerdoEnemigo16" parent="Enemigos" instance=ExtResource( 6 )]
 position = Vector2( 221.583, -440.497 )
+key = true
 
 [node name="CerdoEnemigo17" parent="Enemigos" instance=ExtResource( 6 )]
 position = Vector2( 409.298, -597.295 )
+corazon = true
+diamante = true
 
 [node name="CerdoEnemigo18" parent="Enemigos" instance=ExtResource( 6 )]
 position = Vector2( 1566.87, -477.354 )
 
 [node name="Rey_p1" parent="." instance=ExtResource( 1 )]
-position = Vector2( 140.179, 464.546 )
+position = Vector2( 858.555, -550.16 )
 z_index = 1
 
 [node name="ui_screen" parent="." instance=ExtResource( 7 )]
