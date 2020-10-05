@@ -6,9 +6,10 @@ func _ready():
 	
 func _on_Area2D_body_entered(body):
 	if body.name == "Rey_p1":
-		if Jugador.vidas <7:
+		if Jugador.vida <5:
 			Jugador.emit_signal("heart_taken")
-			Jugador.vidas +=1
+			$fx.play()
+			#Jugador.vida +=1
 		$corazon.play("taken")
 	pass # Replace with function body.
 

@@ -16,13 +16,14 @@ _global_script_class_icons={
 [application]
 
 config/name="Hail to the Pig"
-run/main_scene="res://Levels/Level_1.tscn"
+run/main_scene="res://GUI/Main Menu/main_menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Jugador="*res://Recursos/Propiedades_Jugador.gd"
 Puerta="*res://Recursos/Propiedades_puerta.gd"
+Music="*res://GUI/Music/music.gd"
 
 [display]
 

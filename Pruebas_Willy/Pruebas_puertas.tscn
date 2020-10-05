@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Recursos/Terreno.tres" type="TileSet" id=1]
 [ext_resource path="res://Objetos/Puerta/Puerta.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Enemigos/cerdo/CerdoEnemigo.tscn" type="PackedScene" id=4]
 [ext_resource path="res://GUI/UI/ui_screen_1.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Enemigos/Spawner.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Recursos/items.tres" type="TileSet" id=7]
 
 [node name="Node2D" type="Node2D"]
 
@@ -64,3 +65,7 @@ position = Vector2( 597.719, 129.39 )
 [node name="items" type="Node2D" parent="." groups=[
 "items",
 ]]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 7 )
+format = 1

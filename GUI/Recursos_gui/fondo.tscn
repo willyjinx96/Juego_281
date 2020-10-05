@@ -1,0 +1,326 @@
+[gd_scene load_steps=73 format=2]
+
+[ext_resource path="res://Objetos/Puerta/Puerta.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Recursos/AnimatedSprite.res" type="PackedScene" id=2]
+[ext_resource path="res://Recursos/Terreno.tres" type="TileSet" id=3]
+[ext_resource path="res://Recursos/decoracion.tres" type="TileSet" id=4]
+[ext_resource path="res://Objetos/Puerta/Puerta.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Sprites/01-King Human/Fall (78x58).png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/01-King Human/Jump (78x58).png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sprites/01-King Human/Idle (78x58).png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sprites/01-King Human/Attack (78x58).png" type="Texture" id=9]
+[ext_resource path="res://Assets/Sprites/01-King Human/Door In (78x58).png" type="Texture" id=10]
+[ext_resource path="res://Assets/Sprites/01-King Human/Door Out (78x58).png" type="Texture" id=11]
+[ext_resource path="res://Assets/Sprites/01-King Human/Dead (78x58).png" type="Texture" id=12]
+[ext_resource path="res://Assets/Sprites/01-King Human/Hit (78x58).png" type="Texture" id=13]
+[ext_resource path="res://Assets/Sprites/01-King Human/Ground (78x58).png" type="Texture" id=14]
+[ext_resource path="res://Assets/Sprites/01-King Human/Run (78x58).png" type="Texture" id=15]
+[ext_resource path="res://Assets/Sprites/01-King Human/joy (78x58)-sheet.png" type="Texture" id=16]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 8 )
+region = Rect2( 78, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 8 )
+region = Rect2( 156, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 8 )
+region = Rect2( 234, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 8 )
+region = Rect2( 312, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 8 )
+region = Rect2( 390, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 8 )
+region = Rect2( 468, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 8 )
+region = Rect2( 546, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 8 )
+region = Rect2( 624, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 8 )
+region = Rect2( 702, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 8 )
+region = Rect2( 780, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 13 )
+region = Rect2( 0, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 13 )
+region = Rect2( 78, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 9 )
+region = Rect2( 78, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 9 )
+region = Rect2( 156, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 12 )
+region = Rect2( 78, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 12 )
+region = Rect2( 156, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 12 )
+region = Rect2( 234, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 16 )
+region = Rect2( 0, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 16 )
+region = Rect2( 78, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 16 )
+region = Rect2( 156, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 16 )
+region = Rect2( 234, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 16 )
+region = Rect2( 312, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 16 )
+region = Rect2( 390, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 16 )
+region = Rect2( 468, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = ExtResource( 16 )
+region = Rect2( 546, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=50]
+atlas = ExtResource( 16 )
+region = Rect2( 624, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=51]
+atlas = ExtResource( 16 )
+region = Rect2( 702, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=52]
+atlas = ExtResource( 16 )
+region = Rect2( 780, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=53]
+atlas = ExtResource( 16 )
+region = Rect2( 858, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=54]
+atlas = ExtResource( 16 )
+region = Rect2( 936, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=55]
+atlas = ExtResource( 16 )
+region = Rect2( 1014, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=56]
+atlas = ExtResource( 16 )
+region = Rect2( 1092, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 14 )
+region = Rect2( 0, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 11 )
+region = Rect2( 546, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 15 )
+region = Rect2( 0, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 15 )
+region = Rect2( 78, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 15 )
+region = Rect2( 156, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 15 )
+region = Rect2( 234, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 15 )
+region = Rect2( 312, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 15 )
+region = Rect2( 390, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 15 )
+region = Rect2( 468, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 15 )
+region = Rect2( 546, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 10 )
+region = Rect2( 0, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 10 )
+region = Rect2( 78, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 10 )
+region = Rect2( 156, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 10 )
+region = Rect2( 234, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 10 )
+region = Rect2( 312, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 10 )
+region = Rect2( 390, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 10 )
+region = Rect2( 468, 0, 78, 58 )
+
+[sub_resource type="AtlasTexture" id=39]
+atlas = ExtResource( 10 )
+region = Rect2( 546, 0, 78, 58 )
+
+[sub_resource type="SpriteFrames" id=41]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"loop": true,
+"name": "idle",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 14 ), SubResource( 15 ) ],
+"loop": true,
+"name": "hit",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
+"loop": false,
+"name": "attack",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ) ],
+"loop": true,
+"name": "dead",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 12 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ) ],
+"loop": true,
+"name": "joy",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 40 ) ],
+"loop": true,
+"name": "fall",
+"speed": 4.98
+}, {
+"frames": [ SubResource( 13 ) ],
+"loop": true,
+"name": "ground",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 16 ) ],
+"loop": true,
+"name": "door_out",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ) ],
+"loop": true,
+"name": "run",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ) ],
+"loop": false,
+"name": "door_in",
+"speed": 10.0
+} ]
+
+[node name="fondo" type="Node2D"]
+scale = Vector2( 3, 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." instance=ExtResource( 2 )]
+position = Vector2( 206.333, 177.235 )
+z_index = 1
+frames = SubResource( 41 )
+animation = "joy"
+frame = 5
+playing = true
+
+[node name="fondo_1" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( -1, 0, 0, -65536, 0, 1, -65535, 0, 1, -65534, 0, 1, -65533, 0, 1, -65532, 0, 1, -65531, 0, 1, -65530, 0, 1, -65529, 0, 1, -65528, 0, 1, -65527, 0, 1, -65526, 0, 1, -65525, 0, 1, -65524, 0, 2, 65535, 0, 65536, 0, 0, 6, 1, 0, 131073, 2, 0, 131073, 3, 0, 131073, 4, 0, 131073, 5, 0, 131073, 6, 0, 131073, 7, 0, 131073, 8, 0, 131073, 9, 0, 131073, 10, 0, 131073, 11, 0, 7, 12, 0, 65538, 131071, 0, 65536, 65536, 0, 65538, 65537, 1, 0, 65538, 1, 1, 65539, 1, 1, 65540, 1, 1, 65541, 1, 1, 65542, 1, 1, 65543, 1, 1, 65544, 1, 1, 65545, 1, 1, 65546, 1, 2, 65547, 0, 65536, 65548, 0, 65538, 196607, 0, 65536, 131072, 0, 65538, 131073, 1, 65536, 131074, 1, 65537, 131075, 1, 65537, 131076, 1, 65537, 131077, 1, 65537, 131078, 1, 65537, 131079, 1, 65537, 131080, 1, 65537, 131081, 1, 65537, 131082, 1, 65538, 131083, 0, 65536, 131084, 0, 65538, 262143, 0, 65536, 196608, 0, 65538, 196609, 1, 65536, 196610, 1, 65537, 196611, 1, 65537, 196612, 1, 65537, 196613, 1, 65537, 196614, 1, 65537, 196615, 1, 65537, 196616, 1, 65537, 196617, 1, 65537, 196618, 1, 65538, 196619, 0, 65536, 196620, 0, 65538, 327679, 0, 65536, 262144, 0, 65538, 262145, 1, 65536, 262146, 1, 65537, 262147, 1, 65537, 262148, 1, 65537, 262149, 1, 65537, 262150, 1, 65537, 262151, 1, 65537, 262152, 1, 65537, 262153, 1, 65537, 262154, 1, 65538, 262155, 0, 65536, 262156, 0, 65538, 393215, 0, 65536, 327680, 0, 65538, 327681, 1, 131072, 327682, 1, 131073, 327683, 1, 131073, 327684, 1, 131073, 327685, 1, 131073, 327686, 1, 131073, 327687, 1, 131073, 327688, 1, 131073, 327689, 1, 131073, 327690, 1, 131074, 327691, 0, 65536, 327692, 0, 65538, 458751, 0, 65536, 393216, 0, 65542, 393217, 0, 1, 393218, 0, 1, 393219, 0, 1, 393220, 0, 1, 393221, 0, 1, 393222, 0, 1, 393223, 0, 1, 393224, 0, 1, 393225, 0, 1, 393226, 0, 1, 393227, 0, 65543, 393228, 0, 65538, 524287, 0, 131072, 458752, 0, 131073, 458753, 0, 131073, 458754, 0, 131073, 458755, 0, 131073, 458756, 0, 131073, 458757, 0, 131073, 458758, 0, 131073, 458759, 0, 131073, 458760, 0, 131073, 458761, 0, 131073, 458762, 0, 131073, 458763, 0, 131073, 458764, 0, 131074 )
+
+[node name="fondo_2" type="TileMap" parent="."]
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 65537, 0, 0, 65546, 1, 0, 131073, 0, 65536, 131082, 1, 65536, 196609, 0, 65536, 196618, 1, 65536, 262145, 0, 131072, 262147, 3, 0, 262148, 3, 1, 262151, 2, 0, 262152, 2, 1, 262154, 1, 196608, 327683, 3, 65536, 327684, 3, 65537, 327687, 2, 65536, 327688, 2, 65537 )
+
+[node name="door" type="Area2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 196.431, 163.879 )
+collision_layer = 2147483712
+script = ExtResource( 5 )
+[connection signal="body_entered" from="door" to="door" method="_on_door_body_entered"]
+[connection signal="body_exited" from="door" to="door" method="_on_door_body_exited"]

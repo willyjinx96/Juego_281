@@ -1,0 +1,471 @@
+[gd_scene load_steps=44 format=2]
+
+[ext_resource path="res://Assets/Sprites/17-GUI/Prefabs/5.png" type="Texture" id=1]
+[ext_resource path="res://GUI/Recursos_gui/small_banner.tres" type="TileSet" id=2]
+[ext_resource path="res://Assets/Sprites/17-GUI/Small Text/Small Text/22.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/17-GUI/Small Text/Small Text/18.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/17-GUI/Small Text/Small Text/1.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Sprites/17-GUI/Small Text/Small Text/13.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/17-GUI/Small Text/Small Text/7.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sprites/17-GUI/Small Text/Small Text/5.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sprites/17-GUI/Small Text/Small Text/15.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Sprites/17-GUI/Small Text/Small Text/31.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Sprites/17-GUI/Small Text/Small Text/3.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Sprites/17-GUI/Small Text/Small Text/50.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Sprites/17-GUI/Prefabs/11.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Sprites/17-GUI/Small Text/Small Text/24.png" type="Texture" id=14]
+[ext_resource path="res://Recursos/Fuentes/PressStart2P-Regular.ttf" type="DynamicFontData" id=15]
+[ext_resource path="res://Assets/Sprites/17-GUI/Green Button/1.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Sprites/17-GUI/Yellow Button/1.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Sprites/17-GUI/Small Text/Small Text/9.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Sprites/17-GUI/Small Text/Small Icons/8.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Sprites/17-GUI/Small Text/Small Icons/26.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Sprites/17-GUI/Small Text/Small Text/12.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Sprites/17-GUI/Small Text/Small Text/19.png" type="Texture" id=22]
+[ext_resource path="res://GUI/Game Over/game_over_scene.gd" type="Script" id=23]
+[ext_resource path="res://Recursos/Terreno.tres" type="TileSet" id=24]
+[ext_resource path="res://Recursos/decoracion.tres" type="TileSet" id=25]
+[ext_resource path="res://Assets/Sprites/17-GUI/Small Text/Small Text/4.png" type="Texture" id=26]
+[ext_resource path="res://Assets/Sprites/17-GUI/Prefabs/8.png" type="Texture" id=27]
+[ext_resource path="res://Assets/Sprites/12-Live and Coins/Small Diamond (18x14).png" type="Texture" id=28]
+[ext_resource path="res://Assets/Sprites/17-GUI/Small Text/Small Text/20.png" type="Texture" id=29]
+[ext_resource path="res://Assets/Sprites/17-GUI/Small Text/Small Text/14.png" type="Texture" id=30]
+
+[sub_resource type="TileSet" id=1]
+0/name = "5.png 0"
+0/texture = ExtResource( 1 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 96, 96 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 0
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 256, Vector2( 0, 1 ), 260, Vector2( 0, 2 ), 4, Vector2( 1, 0 ), 320, Vector2( 1, 1 ), 325, Vector2( 1, 2 ), 5, Vector2( 2, 0 ), 64, Vector2( 2, 1 ), 65, Vector2( 2, 2 ), 1 ]
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 32, 32 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 15 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 28 )
+region = Rect2( 0, 0, 18, 14 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 28 )
+region = Rect2( 18, 0, 18, 14 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 28 )
+region = Rect2( 36, 0, 18, 14 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 28 )
+region = Rect2( 54, 0, 18, 14 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 28 )
+region = Rect2( 72, 0, 18, 14 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 28 )
+region = Rect2( 90, 0, 18, 14 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 28 )
+region = Rect2( 108, 0, 18, 14 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 28 )
+region = Rect2( 126, 0, 18, 14 )
+
+[sub_resource type="SpriteFrames" id=12]
+animations = [ {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"loop": true,
+"name": "normal",
+"speed": 10.0
+} ]
+
+[sub_resource type="DynamicFont" id=13]
+font_data = ExtResource( 15 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "cargar"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("gui:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
+}
+
+[node name="game_over" type="Node2D"]
+scale = Vector2( 3, 3 )
+script = ExtResource( 23 )
+
+[node name="fondo" type="Node2D" parent="."]
+visible = false
+
+[node name="TileMap2" type="TileMap" parent="fondo"]
+tile_set = ExtResource( 25 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 65537, 1, 0, 65539, 1, 0, 65541, 1, 0, 65542, 0, 0, 65544, 0, 0, 131073, 1, 65536, 131075, 1, 65536, 131077, 1, 65536, 131078, 0, 65536, 131080, 0, 65536, 196609, 1, 196608, 196611, 1, 65536, 196613, 1, 196608, 196614, 0, 131072, 196616, 0, 65536, 262145, 2, 0, 262146, 2, 1, 262147, 1, 196608, 262149, 3, 0, 262150, 3, 1, 262152, 0, 131072, 327681, 2, 65536, 327682, 2, 65537, 327685, 3, 65536, 327686, 3, 65537 )
+
+[node name="TileMap" type="TileMap" parent="fondo"]
+z_index = -1
+tile_set = ExtResource( 24 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 0, 0, 196623, 1, 0, 262145, 2, 0, 262145, 3, 0, 262145, 4, 0, 262145, 5, 0, 262145, 6, 0, 262145, 7, 0, 262145, 8, 0, 262145, 9, 0, 262145, 10, 0, 196624, 65536, 0, 65540, 65537, 1, 0, 65538, 1, 1, 65539, 1, 1, 65540, 1, 1, 65541, 1, 1, 65542, 1, 1, 65543, 1, 1, 65544, 1, 1, 65545, 1, 2, 65546, 0, 65540, 131072, 0, 65540, 131073, 1, 65536, 131074, 1, 65537, 131075, 1, 65537, 131076, 1, 65537, 131077, 1, 65537, 131078, 1, 65537, 131079, 1, 65537, 131080, 1, 65537, 131081, 1, 65538, 131082, 0, 65540, 196608, 0, 65540, 196609, 1, 65536, 196610, 1, 65537, 196611, 1, 65537, 196612, 1, 65537, 196613, 1, 65537, 196614, 1, 65537, 196615, 1, 65537, 196616, 1, 65537, 196617, 1, 65538, 196618, 0, 65540, 262144, 0, 65540, 262145, 1, 65536, 262146, 1, 65537, 262147, 1, 65537, 262148, 1, 65537, 262149, 1, 65537, 262150, 1, 65537, 262151, 1, 65537, 262152, 1, 65537, 262153, 1, 65538, 262154, 0, 65540, 327680, 0, 65540, 327681, 1, 131072, 327682, 1, 131073, 327683, 1, 131073, 327684, 1, 131073, 327685, 1, 131073, 327686, 1, 131073, 327687, 1, 131073, 327688, 1, 131073, 327689, 1, 131074, 327690, 0, 65540, 393216, 0, 262159, 393217, 0, 262145, 393218, 0, 262145, 393219, 0, 262145, 393220, 0, 262145, 393221, 0, 262145, 393222, 0, 262145, 393223, 0, 262145, 393224, 0, 262145, 393225, 0, 262145, 393226, 0, 262160 )
+
+[node name="gui" type="Node2D" parent="."]
+
+[node name="panel" type="TileMap" parent="gui"]
+show_behind_parent = true
+position = Vector2( 9.34388, 5.33936 )
+tile_set = SubResource( 1 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 65539, 0, 0, 65540, 0, 1, 65541, 0, 1, 65542, 0, 2, 65543, 0, 0, 65544, 0, 1, 65545, 0, 2, 131075, 0, 65536, 131076, 0, 65537, 131077, 0, 65537, 131078, 0, 65538, 131079, 0, 65536, 131080, 0, 65537, 131081, 0, 65538, 196611, 0, 131072, 196612, 0, 131073, 196613, 0, 131073, 196614, 0, 131074, 196615, 0, 131072, 196616, 0, 131073, 196617, 0, 131074, 262147, 0, 0, 262148, 0, 1, 262149, 0, 1, 262150, 0, 2, 327683, 0, 131072, 327684, 0, 131073, 327685, 0, 131073, 327686, 0, 131074 )
+
+[node name="titulo" type="Node2D" parent="gui"]
+position = Vector2( -31.9639, -1.99774 )
+scale = Vector2( 1.2, 1.2 )
+
+[node name="small_banner" type="TileMap" parent="gui/titulo"]
+position = Vector2( 9.66667, 5.33333 )
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 3, 0, 0, 4, 12, 0, 5, 12, 0, 6, 1, 0 )
+
+[node name="game_over" type="Node2D" parent="gui/titulo"]
+position = Vector2( 147.716, 20.2933 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="G" type="Sprite" parent="gui/titulo/game_over"]
+texture = ExtResource( 7 )
+
+[node name="A" type="Sprite" parent="gui/titulo/game_over"]
+texture = ExtResource( 5 )
+offset = Vector2( 6, 0 )
+
+[node name="M" type="Sprite" parent="gui/titulo/game_over"]
+texture = ExtResource( 6 )
+offset = Vector2( 12, 0 )
+
+[node name="E" type="Sprite" parent="gui/titulo/game_over"]
+texture = ExtResource( 8 )
+offset = Vector2( 18, 0 )
+
+[node name="O" type="Sprite" parent="gui/titulo/game_over"]
+texture = ExtResource( 9 )
+offset = Vector2( 30, 0 )
+
+[node name="V" type="Sprite" parent="gui/titulo/game_over"]
+texture = ExtResource( 3 )
+offset = Vector2( 36, 0 )
+
+[node name="E2" type="Sprite" parent="gui/titulo/game_over"]
+texture = ExtResource( 8 )
+offset = Vector2( 42, 0 )
+
+[node name="R" type="Sprite" parent="gui/titulo/game_over"]
+texture = ExtResource( 4 )
+offset = Vector2( 48, 0 )
+
+[node name="score" type="Node2D" parent="gui"]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="banner" type="Sprite" parent="gui/score"]
+position = Vector2( 168.46, 86.1696 )
+scale = Vector2( 1.30717, 1 )
+texture = ExtResource( 13 )
+
+[node name="score" type="Node2D" parent="gui/score"]
+position = Vector2( 154.017, 64.7806 )
+scale = Vector2( 1.2, 1.2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="S" type="Sprite" parent="gui/score/score"]
+texture = ExtResource( 10 )
+
+[node name="C" type="Sprite" parent="gui/score/score"]
+texture = ExtResource( 11 )
+offset = Vector2( 6, 0 )
+
+[node name="O" type="Sprite" parent="gui/score/score"]
+texture = ExtResource( 9 )
+offset = Vector2( 12, 0 )
+
+[node name="R" type="Sprite" parent="gui/score/score"]
+texture = ExtResource( 4 )
+offset = Vector2( 18, 0 )
+
+[node name="E" type="Sprite" parent="gui/score/score"]
+texture = ExtResource( 8 )
+offset = Vector2( 24, 0 )
+
+[node name="double_dot" type="Sprite" parent="gui/score/score"]
+texture = ExtResource( 12 )
+offset = Vector2( 30, 0 )
+
+[node name="max_score" type="Node2D" parent="gui/score"]
+position = Vector2( 167.452, 94.9505 )
+scale = Vector2( 1.2, 1.2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="S" type="Sprite" parent="gui/score/max_score"]
+texture = ExtResource( 10 )
+
+[node name="C" type="Sprite" parent="gui/score/max_score"]
+texture = ExtResource( 11 )
+offset = Vector2( 6, 0 )
+
+[node name="O" type="Sprite" parent="gui/score/max_score"]
+texture = ExtResource( 9 )
+offset = Vector2( 12, 0 )
+
+[node name="R" type="Sprite" parent="gui/score/max_score"]
+texture = ExtResource( 4 )
+offset = Vector2( 18, 0 )
+
+[node name="E" type="Sprite" parent="gui/score/max_score"]
+texture = ExtResource( 8 )
+offset = Vector2( 24, 0 )
+
+[node name="double_dot" type="Sprite" parent="gui/score/max_score"]
+texture = ExtResource( 12 )
+offset = Vector2( 30, 0 )
+
+[node name="M" type="Sprite" parent="gui/score/max_score"]
+texture = ExtResource( 6 )
+offset = Vector2( -24, 0 )
+
+[node name="A" type="Sprite" parent="gui/score/max_score"]
+texture = ExtResource( 5 )
+offset = Vector2( -18, 0 )
+
+[node name="X" type="Sprite" parent="gui/score/max_score"]
+texture = ExtResource( 14 )
+offset = Vector2( -12, 0 )
+
+[node name="text_score" type="Label" parent="gui/score"]
+margin_left = 152.888
+margin_top = 72.6674
+margin_right = 201.888
+margin_bottom = 88.6674
+rect_scale = Vector2( 0.7, 0.7 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.352941, 0.317647, 0.439216, 1 )
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="text_max_score" type="Label" parent="gui/score"]
+margin_left = 153.333
+margin_top = 102.479
+margin_right = 202.333
+margin_bottom = 118.479
+rect_scale = Vector2( 0.7, 0.7 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.707031, 0.13533, 0.244626, 1 )
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="opciones" type="Node2D" parent="gui"]
+position = Vector2( -73.7333, -50.6761 )
+scale = Vector2( 1.3, 1.3 )
+
+[node name="reiniciar" type="TextureButton" parent="gui/opciones"]
+margin_left = 150.023
+margin_top = 156.426
+margin_right = 164.023
+margin_bottom = 170.426
+rect_scale = Vector2( 1.5, 1.5 )
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="gui/opciones/reiniciar"]
+position = Vector2( 7.29944, 5.76272 )
+texture = ExtResource( 20 )
+
+[node name="menu" type="TextureButton" parent="gui/opciones"]
+margin_left = 177.744
+margin_top = 155.905
+margin_right = 191.744
+margin_bottom = 169.905
+rect_scale = Vector2( 1.5, 1.5 )
+rect_clip_content = true
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="gui/opciones/menu"]
+position = Vector2( 6.91525, 6.01884 )
+texture = ExtResource( 19 )
+
+[node name="exit" type="Node2D" parent="gui/opciones"]
+
+[node name="exit" type="TileMap" parent="gui/opciones/exit"]
+position = Vector2( -1.99774, -4.99436 )
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 327686, 10, 0, 327687, 1, 0 )
+
+[node name="salir" type="Node2D" parent="gui/opciones/exit"]
+position = Vector2( 210.569, 169.875 )
+scale = Vector2( 0.8, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="S" type="Sprite" parent="gui/opciones/exit/salir"]
+texture = ExtResource( 22 )
+
+[node name="A" type="Sprite" parent="gui/opciones/exit/salir"]
+texture = ExtResource( 5 )
+offset = Vector2( 6, 0 )
+
+[node name="L" type="Sprite" parent="gui/opciones/exit/salir"]
+texture = ExtResource( 21 )
+offset = Vector2( 12, 0 )
+
+[node name="I" type="Sprite" parent="gui/opciones/exit/salir"]
+texture = ExtResource( 18 )
+offset = Vector2( 18, 0 )
+
+[node name="R" type="Sprite" parent="gui/opciones/exit/salir"]
+texture = ExtResource( 4 )
+offset = Vector2( 24, 0 )
+
+[node name="boton_salir" type="TextureButton" parent="gui/opciones/exit"]
+margin_left = 207.68
+margin_top = 165.957
+margin_right = 332.68
+margin_bottom = 208.957
+rect_scale = Vector2( 0.2, 0.2 )
+hint_tooltip = "Salir del juego."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="info_diamantes" type="Node2D" parent="gui"]
+
+[node name="Sprite" type="Sprite" parent="gui/info_diamantes"]
+position = Vector2( 281.727, 70.6906 )
+scale = Vector2( 0.914159, 0.446019 )
+texture = ExtResource( 27 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="gui/info_diamantes"]
+position = Vector2( 272.597, 104.28 )
+scale = Vector2( 1.5, 1.5 )
+frames = SubResource( 12 )
+animation = "normal"
+frame = 2
+playing = true
+
+[node name="diamntes" type="Node2D" parent="gui/info_diamantes"]
+position = Vector2( 257.417, 71.7425 )
+scale = Vector2( 1.04, 1.3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="D" type="Sprite" parent="gui/info_diamantes/diamntes"]
+texture = ExtResource( 26 )
+
+[node name="I" type="Sprite" parent="gui/info_diamantes/diamntes"]
+texture = ExtResource( 18 )
+offset = Vector2( 6, 0 )
+
+[node name="A" type="Sprite" parent="gui/info_diamantes/diamntes"]
+texture = ExtResource( 5 )
+offset = Vector2( 12, 0 )
+
+[node name="M" type="Sprite" parent="gui/info_diamantes/diamntes"]
+texture = ExtResource( 6 )
+offset = Vector2( 18, 0 )
+
+[node name="A2" type="Sprite" parent="gui/info_diamantes/diamntes"]
+texture = ExtResource( 5 )
+offset = Vector2( 24, 0 )
+
+[node name="N" type="Sprite" parent="gui/info_diamantes/diamntes"]
+texture = ExtResource( 30 )
+offset = Vector2( 30, 0 )
+
+[node name="T" type="Sprite" parent="gui/info_diamantes/diamntes"]
+texture = ExtResource( 29 )
+offset = Vector2( 36, 0 )
+
+[node name="E" type="Sprite" parent="gui/info_diamantes/diamntes"]
+texture = ExtResource( 8 )
+offset = Vector2( 42, 0 )
+
+[node name="S" type="Sprite" parent="gui/info_diamantes/diamntes"]
+texture = ExtResource( 22 )
+offset = Vector2( 48, 0 )
+
+[node name="cant_diamantes" type="Label" parent="gui/info_diamantes"]
+margin_left = 288.315
+margin_top = 96.3146
+margin_right = 322.315
+margin_bottom = 112.315
+rect_scale = Vector2( 0.8, 1 )
+custom_fonts/font = SubResource( 13 )
+text = "00"
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="animacion" type="AnimationPlayer" parent="."]
+autoplay = "cargar"
+anims/cargar = SubResource( 3 )
+[connection signal="pressed" from="gui/opciones/reiniciar" to="." method="_on_reiniciar_pressed"]
+[connection signal="pressed" from="gui/opciones/menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="gui/opciones/exit/boton_salir" to="." method="_on_boton_salir_pressed"]
+[connection signal="animation_finished" from="animacion" to="." method="_on_animacion_animation_finished"]

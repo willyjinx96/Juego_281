@@ -53,11 +53,13 @@ animations = [ {
 } ]
 
 [node name="spawner_pigs" type="Position2D"]
-position = Vector2( 66.0104, 32.795 )
+position = Vector2( 67.0104, 28.295 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
+min_time = 5
+max_time = 10
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 z_index = 3
@@ -67,8 +69,12 @@ frame = -1
 playing = true
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
-autostart = true
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 6.8722, 15.4431 )
+scale = Vector2( 7.3298, 1.90963 )
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite" to="." method="_on_AnimatedSprite_frame_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

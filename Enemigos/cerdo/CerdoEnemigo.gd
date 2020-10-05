@@ -262,6 +262,7 @@ func _on_AnimatedSprite_animation_finished():
 				cambiarTransicion_a(MUERTE)
 				$pighurt.stop()
 		MUERTE:
+			Jugador.score +=10
 			$pighurt.stop()
 			$AnimatedSprite.stop()
 			$CollisionShape2D.disabled=true
@@ -270,24 +271,28 @@ func _on_AnimatedSprite_animation_finished():
 			
 
 func botar_item():
+	print(Jugador.posicion)
 	if corazon:
 		var item_corazon = items[0].instance()
 		#get_parent().add_child(item_corazon)
 		get_tree().get_nodes_in_group("spawner_item_cerdo")[0].add_child(item_corazon)
 		#get_tree().get_root().add_child(item_corazon)
-		item_corazon.global_position.x =self.global_position.x-20
+		#item_corazon.global_position.x =Jugador.posicion.x-100
+		item_corazon.global_position =$spawer_item.global_position +Vector2(20,0)
 	if diamante:
 		var item_diamante= items[1].instance()
 		#get_parent().add_child(item_diamante)
 		get_tree().get_nodes_in_group("spawner_item_cerdo")[0].add_child(item_diamante)
 		#get_tree().get_root().add_child(item_diamante)
-		item_diamante.global_position.x =self.global_position.x
+		#item_diamante.global_position.x =Jugador.posicion.x-50
+		item_diamante.global_position =$spawer_item.global_position +Vector2(-20,0)
 	if key:
 		var item_key= items[2].instance()
 		#get_parent().add_child(item_key)
 		get_tree().get_nodes_in_group("spawner_item_cerdo")[0].add_child(item_key)
 		#get_tree().get_root().add_child(item_key)
-		item_key.global_position.x =self.global_position.x+20
+		#item_key.global_position.x =Jugador.posicion.x+100
+		item_key.global_position =$spawer_item.global_position
 	pass
 
 

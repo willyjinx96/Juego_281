@@ -1,0 +1,268 @@
+[gd_scene load_steps=29 format=2]
+
+[ext_resource path="res://Recursos/Fuentes/PressStart2P-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Recursos/Terreno.tres" type="TileSet" id=2]
+[ext_resource path="res://Assets/Sprites/03-Pig/Idle (34x28).png" type="Texture" id=3]
+[ext_resource path="res://Recursos/decoracion.tres" type="TileSet" id=4]
+[ext_resource path="res://GUI/Recursos_gui/big_banner.tres" type="TileSet" id=5]
+[ext_resource path="res://GUI/Recursos_gui/green_button.tres" type="TileSet" id=6]
+[ext_resource path="res://Assets/Sprites/17-GUI/small_icon_white/menu_black.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sprites/17-GUI/small_icon_white/menu_white.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sprites/17-GUI/Big Text/15.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Sprites/17-GUI/Big Text/9.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Sprites/17-GUI/Big Text/6.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Sprites/17-GUI/Big Text/14.png" type="Texture" id=12]
+[ext_resource path="res://GUI/Info/Info.gd" type="Script" id=13]
+
+[sub_resource type="DynamicFont" id=1]
+extra_spacing_top = 3
+extra_spacing_bottom = 1
+extra_spacing_char = 1
+extra_spacing_space = 5
+font_data = ExtResource( 1 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 34, 28 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 3 )
+region = Rect2( 34, 0, 34, 28 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 3 )
+region = Rect2( 68, 0, 34, 28 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 3 )
+region = Rect2( 102, 0, 34, 28 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 3 )
+region = Rect2( 136, 0, 34, 28 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 3 )
+region = Rect2( 170, 0, 34, 28 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 3 )
+region = Rect2( 204, 0, 34, 28 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 3 )
+region = Rect2( 238, 0, 34, 28 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 3 )
+region = Rect2( 272, 0, 34, 28 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 3 )
+region = Rect2( 306, 0, 34, 28 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 3 )
+region = Rect2( 340, 0, 34, 28 )
+
+[sub_resource type="SpriteFrames" id=13]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="DynamicFont" id=14]
+outline_size = 1
+outline_color = Color( 0.917647, 0.772549, 0.619608, 1 )
+extra_spacing_top = 3
+extra_spacing_bottom = 3
+extra_spacing_space = 1
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=15]
+resource_name = "info"
+length = 16.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("info_banner/Label:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 3.1, 3.8, 9.6, 10.5, 12.4, 13.4, 14.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.225, 0.225, 0.78, 0.78, 0.925, 0.925, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("info_banner/Label2:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 15.6, 16.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("info_banner/TileMap3:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
+}
+
+[node name="informacion" type="Node2D"]
+script = ExtResource( 13 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 175.571
+margin_top = -540.918
+margin_right = 750.571
+margin_bottom = -28.9184
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.8, 0.670588, 0.466667, 1 )
+custom_constants/shadow_offset_x = 0
+text = "El reino de los cerdonios a caido, muchos han sido castigados por haberse sublevado contra el rey Alejandro.
+En cuanto al rey Pigman ha sido condenado a la horca por haber desatado una revolucion, ahora todo se encuentra bien el rey esta gobernando otra vez, los cerdonios ahora sirven fielmente al rey bajo amenaza de ser ejecutados si inetentan tomar el castillo otra vez.
+
+
+El rey Alejandro obtuvo la victoria
+
+Pero a que costo..."
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="fondo" type="Node2D" parent="."]
+position = Vector2( -14.6832, -34.7058 )
+scale = Vector2( 3, 3 )
+
+[node name="TileMap" type="TileMap" parent="fondo"]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( -1, 0, 0, -65536, 0, 1, -65535, 0, 1, -65534, 0, 1, -65533, 0, 1, -65532, 0, 1, -65531, 0, 1, -65530, 0, 1, -65529, 0, 1, -65528, 0, 1, -65527, 0, 1, -65526, 0, 1, -65525, 0, 2, 65535, 0, 65536, 0, 0, 6, 1, 0, 131073, 2, 0, 131073, 3, 0, 131073, 4, 0, 131073, 5, 0, 131073, 6, 0, 131073, 7, 0, 131073, 8, 0, 131073, 9, 0, 131073, 10, 0, 7, 11, 0, 65538, 131071, 0, 65536, 65536, 0, 65538, 65537, 1, 0, 65538, 1, 1, 65539, 1, 1, 65540, 1, 1, 65541, 1, 1, 65542, 1, 1, 65543, 1, 1, 65544, 1, 1, 65545, 1, 2, 65546, 0, 65536, 65547, 0, 65538, 196607, 0, 65536, 131072, 0, 65538, 131073, 1, 65536, 131074, 1, 65537, 131075, 1, 65537, 131076, 1, 65537, 131077, 1, 65537, 131078, 1, 65537, 131079, 1, 65537, 131080, 1, 65537, 131081, 1, 65538, 131082, 0, 65536, 131083, 0, 65538, 262143, 0, 65536, 196608, 0, 65538, 196609, 1, 65536, 196610, 1, 65537, 196611, 1, 65537, 196612, 1, 65537, 196613, 1, 65537, 196614, 1, 65537, 196615, 1, 65537, 196616, 1, 65537, 196617, 1, 65538, 196618, 0, 65536, 196619, 0, 65538, 327679, 0, 65536, 262144, 0, 65538, 262145, 1, 65536, 262146, 1, 65537, 262147, 1, 65537, 262148, 1, 65537, 262149, 1, 65537, 262150, 1, 65537, 262151, 1, 65537, 262152, 1, 65537, 262153, 1, 65538, 262154, 0, 65536, 262155, 0, 65538, 393215, 0, 65536, 327680, 0, 65538, 327681, 1, 131072, 327682, 1, 131073, 327683, 1, 131073, 327684, 1, 131073, 327685, 1, 131073, 327686, 1, 131073, 327687, 1, 131073, 327688, 1, 131073, 327689, 1, 131074, 327690, 0, 65536, 327691, 0, 65538, 458751, 0, 131072, 393216, 0, 262150, 393217, 0, 262145, 393218, 0, 262145, 393219, 0, 262145, 393220, 0, 262145, 393221, 0, 262145, 393222, 0, 262145, 393223, 0, 262145, 393224, 0, 262145, 393225, 0, 262145, 393226, 0, 262151, 393227, 0, 131074 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="fondo"]
+position = Vector2( 58.9256, 179.134 )
+frames = SubResource( 13 )
+frame = 1
+playing = true
+
+[node name="TileMap2" type="TileMap" parent="fondo"]
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 65537, 1, 0, 65540, 0, 0, 65543, 0, 0, 131073, 1, 65536, 131076, 0, 65536, 131079, 0, 65536, 196609, 1, 65536, 196612, 0, 65536, 196615, 0, 65536, 262145, 1, 196608, 262146, 2, 0, 262147, 2, 1, 262148, 0, 131072, 262149, 2, 0, 262150, 2, 1, 262151, 0, 131072, 262152, 3, 0, 262153, 3, 1, 327682, 2, 65536, 327683, 2, 65537, 327685, 2, 65536, 327686, 2, 65537, 327688, 3, 65536, 327689, 3, 65537 )
+
+[node name="info_banner" type="Node2D" parent="."]
+position = Vector2( -14.6832, -34.7058 )
+scale = Vector2( 3, 3 )
+z_index = 2
+
+[node name="TileMap3" type="TileMap" parent="info_banner"]
+position = Vector2( 65.5252, 193.747 )
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( -327680, 0, 0, -327679, 28, 0, -327678, 28, 0, -327677, 28, 0, -327676, 28, 0, -327675, 28, 0, -327674, 7, 0, -262144, 2, 0, -262143, 29, 0, -262142, 29, 0, -262141, 29, 0, -262140, 29, 0, -262139, 29, 0, -262138, 3, 0, -196608, 2, 0, -196607, 29, 0, -196606, 29, 0, -196605, 29, 0, -196604, 29, 0, -196603, 29, 0, -196602, 3, 0, -131072, 2, 0, -131071, 29, 0, -131070, 29, 0, -131069, 29, 0, -131068, 29, 0, -131067, 29, 0, -131066, 3, 0, -65536, 4, 0, -65535, 30, 0, -65534, 30, 0, -65533, 30, 0, -65532, 30, 0, -65531, 30, 0, -65530, 16, 0 )
+
+[node name="Label" type="Label" parent="info_banner"]
+margin_left = 92.6469
+margin_top = 62.8847
+margin_right = 656.647
+margin_bottom = 361.885
+rect_scale = Vector2( 0.3, 0.3 )
+custom_fonts/font = SubResource( 14 )
+custom_colors/font_color = Color( 0.247059, 0.219608, 0.317647, 1 )
+text = "Nosotros los cerdonios hemos robado el castillo del Rey Alejandro. Tal parece que ese rey necio viene a recuperarlo, pero no le dejaremos, hemos cerrado las puertas y escondido las llaves, solo para que el rey Alejandro no pueda avanzar.
+Si quiere pelear lo estaremos esperando...
+
+Estamos preparados..."
+align = 3
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="info_banner"]
+margin_left = 139.878
+margin_top = 147.367
+margin_right = 339.878
+margin_bottom = 194.367
+rect_scale = Vector2( 0.4, 0.4 )
+custom_fonts/font = SubResource( 14 )
+custom_colors/font_color = Color( 0.247059, 0.219608, 0.317647, 1 )
+text = "
+Oink Oink..."
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="boton_volver" type="Node2D" parent="."]
+position = Vector2( 48.7353, 19.0703 )
+
+[node name="TileMap" type="TileMap" parent="boton_volver"]
+position = Vector2( 45.5569, 3.17834 )
+scale = Vector2( 5, 5 )
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 14, 14 )
+format = 1
+tile_data = PoolIntArray( 458762, 1, 0, 458763, 2, 0, 458764, 3, 0 )
+
+[node name="volver" type="TextureButton" parent="boton_volver"]
+margin_left = 760.589
+margin_top = 504.941
+margin_right = 942.589
+margin_bottom = 536.941
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 8 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="titulo" type="Node2D" parent="."]
+position = Vector2( 444.186, 68.4651 )
+scale = Vector2( 5, 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="I" type="Sprite" parent="titulo"]
+texture = ExtResource( 10 )
+
+[node name="N" type="Sprite" parent="titulo"]
+texture = ExtResource( 12 )
+offset = Vector2( 10, 0 )
+
+[node name="F" type="Sprite" parent="titulo"]
+texture = ExtResource( 11 )
+offset = Vector2( 20, 0 )
+
+[node name="O" type="Sprite" parent="titulo"]
+texture = ExtResource( 9 )
+offset = Vector2( 30, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "info"
+anims/info = SubResource( 15 )
+[connection signal="pressed" from="boton_volver/volver" to="." method="_on_volver_pressed"]

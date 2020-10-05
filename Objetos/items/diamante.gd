@@ -8,6 +8,8 @@ func _ready():
 func _on_Area2D_body_entered(body):
 	if body.name == "Rey_p1":
 		$AnimatedSprite.play("taken")
+		$fx.play()
+		Jugador.score += 5
 	pass # Replace with function body.
 
 

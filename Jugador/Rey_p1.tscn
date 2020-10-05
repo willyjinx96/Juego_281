@@ -9,16 +9,17 @@ height = 6.47461
 [sub_resource type="CircleShape2D" id=2]
 radius = 28.8497
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[node name="KinematicBody2D" type="KinematicBody2D" groups=[
+"jugador",
+]]
 pause_mode = 1
 collision_mask = 55
 script = ExtResource( 2 )
-vidas = 3
 
 [node name="movement" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 3
+frame = 7
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

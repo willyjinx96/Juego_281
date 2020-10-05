@@ -40,11 +40,12 @@ var hurt =false
 var teleport = false
 #variables de vida
 
-export var vidas = 0
+var vidas
 var moverse
 var input_state
 
 func _ready():
+	vidas = Jugador.vida
 	input_state=true
 	movimiento_Personaje(true)
 	transition_to(IDLE)
@@ -52,9 +53,11 @@ func _ready():
 	#Jugador.cambiar_vida(vidas)
 	
 func _physics_process(delta):
+	Jugador.posicion = global_position
+	#Jugador.connect("reiniciar",self,"reiniciar")
 	estados()#Cambia de estados de la animacion
 	movimiento(input_state)#habilita o dehabilita la entrada por teclado
-	if Jugador.vidas <=0:
+	if Jugador.vida <=0:
 		can_attack=false
 		estado_fisicas(false)#Habilta/deshabilita la colision y gravedad del cuerpo
 		movimiento_Personaje(false)#habilita/deshabilita el move and slide
@@ -135,6 +138,9 @@ func _on_movement_animation_finished():
 	if $movement.animation=="dead":
 		movimiento(false)
 		motion.x=0
+		#get_tree().change_scene("res://GUI/Game Over/game_over_scene.tscn")
+		Jugador.emit_signal("game_over")
+		#game_o.global_position = get_parent().global_position
 		#estado_fisicas(false)
 		#pausar()
 	if $movement.animation == "invisible":
@@ -154,8 +160,8 @@ func pausar():
 
 func damage():
 	if not Jugador.invulnerable:
-		Jugador.vidas -= 1
-		
+		Jugador.vida -= 1
+		print(Jugador.vida)
 		hurt = true
 		cambiar_estado(false)
 		movimiento_Personaje(false)
@@ -223,7 +229,7 @@ func estados():
 		transition_to(IDLE)
 	if state==HIT and !is_on_floor() and animation_finished==2:
 		transition_to(FALL)
-	if state in [HIT,IDLE,JUMP,FALL] and Jugador.vidas<=0 and animation_finished==2:
+	if state in [HIT,IDLE,JUMP,FALL] and Jugador.vida<=0 and animation_finished==2:
 		transition_to(DEAD)
 
 #WILLY ESTO HICE PARA PROBAR EL LLAMADO DEL CERDITO AL HACERLE DAÑO :V
@@ -262,9 +268,10 @@ func estado_fisicas(estado):
 		MAX_JUMP_HEIGHT = 0
 		MIN_JUMP_HEIGHT = 0
 
-func restaurar_vida(posicion, n_vidas):
-	Jugador.vidas=n_vidas
-	mover_a(posicion)
+func reiniciar():
+	estado_fisicas(true)
+	movimiento(true)
+	#Jugador.vidas +=5
 
 
 func movimiento(estado_entrada):

@@ -1,19 +1,20 @@
 extends TileMap
 
-var vidas = Jugador.vidas
+var vidas
 var offset = 33
 var heart_scene = preload("res://GUI/UI/Barra_vidas/corazon_barra.tscn")
 var live_bar = []
 
 func _ready():
+	vidas=Jugador.vida
 	fill_live_bar()
 	crear_barra()
 	Jugador.connect("hit",self,"remove_heart")
 	Jugador.connect("heart_taken",self,"add_heart")
 	pass
-
+	
 func fill_live_bar():
-	print(vidas)
+	#print(vidas)
 	for i in vidas:
 		var heart = heart_scene.instance()
 		get_tree().get_nodes_in_group("spawner")[0].add_child(heart)
@@ -42,11 +43,12 @@ func remove_heart():
 		live_bar.resize(vidas)
 
 func add_heart():
-	if vidas <7:
+#	if vidas <5:
 		var new_heart= heart_scene.instance()
 		get_tree().get_nodes_in_group("spawner")[0].add_child(new_heart)
 		new_heart.global_position = $spawner_hearts.global_position
 		new_heart.global_position.x += offset* live_bar.size()
 		live_bar.append(new_heart)
+		Jugador.vida +=1
 		vidas +=1
-	crear_barra()
+		crear_barra()
