@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Recursos/movement.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Jugador/Rey_p1.gd" type="Script" id=2]
+[ext_resource path="res://Jugador/camara.gd" type="Script" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 height = 6.47461
@@ -9,7 +10,7 @@ height = 6.47461
 [sub_resource type="CircleShape2D" id=2]
 radius = 28.8497
 
-[node name="KinematicBody2D" type="KinematicBody2D" groups=[
+[node name="Rey_p1" type="KinematicBody2D" groups=[
 "jugador",
 ]]
 pause_mode = 1
@@ -18,23 +19,32 @@ script = ExtResource( 2 )
 
 [node name="movement" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-animation = "idle"
-frame = 7
+animation = "joy"
+frame = 12
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -7.972, 1.52 )
 shape = SubResource( 1 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="camara" type="Camera2D" parent="."]
 rotating = true
 current = true
-zoom = Vector2( 0.4, 0.4 )
+zoom = Vector2( 0.35, 0.35 )
+limit_left = -1184
+limit_top = -670
+limit_right = 1184
+limit_bottom = 670
 limit_smoothed = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 smoothing_enabled = true
 smoothing_speed = 15.0
+drag_margin_left = 0.3
+drag_margin_top = 0.4
+drag_margin_right = 0.3
+drag_margin_bottom = 0.4
+script = ExtResource( 3 )
 
 [node name="ataque" type="Area2D" parent="."]
 position = Vector2( 0, -0.03125 )
@@ -56,7 +66,12 @@ disabled = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="sfx"]
 volume_db = -7.069
+
+[node name="final" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
 [connection signal="attack" from="." to="." method="_on_KinematicBody2D_attack"]
 [connection signal="animation_finished" from="movement" to="." method="_on_movement_animation_finished"]
 [connection signal="body_entered" from="ataque" to="." method="_on_ataque_body_entered"]
 [connection signal="timeout" from="tiempo_de_ataque" to="." method="_on_tiempo_de_ataque_timeout"]
+[connection signal="timeout" from="final" to="." method="_on_final_timeout"]

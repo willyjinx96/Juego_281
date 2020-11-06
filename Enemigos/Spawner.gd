@@ -7,6 +7,9 @@ export var cantidad = 0
 export var infinito = true
 var cont = 0
 export var generar = true
+
+export var final = false
+
 var activo =false
 
 func _on_Timer_timeout():
@@ -26,13 +29,15 @@ func aparecer_cerdo():
 		if cont<=cantidad:
 			var cerdonio = pig_scene.instance()
 			get_parent().add_child(cerdonio)
-			if randi()%4==0:
+			if randi()%4==0 or Jugador.vida <=2:
 				cerdonio.items(true,true,false)
 			else :
 				var rand_bool = randi()%2==0
 				cerdonio.items(false,rand_bool,false)
-			if cont == cantidad:
+			if cont == cantidad and final:
+				print("ultimo cerdonio")
 				cerdonio.items(true,true,false)
+				cerdonio.ultimo()
 				#print(">>>",rand_bool)
 			cerdonio.global_position=global_position
 		else:

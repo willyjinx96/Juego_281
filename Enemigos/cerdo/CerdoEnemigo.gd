@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name cerdonio
 
 var accionSwIzquierda=true
 var esEnemigoDetectado=false
@@ -26,6 +27,8 @@ export var diamante = false
 export var key = false
 
 var dead =false
+
+var final =false
 
 var items=[preload("res://Objetos/items/corazon.tscn"),
 			preload("res://Objetos/items/diamante.tscn"),
@@ -87,7 +90,8 @@ func _physics_process(delta):
 	posicion+=Vector2(0,1)
 	posicion.y=posicion.y*gravedad
 	
-	var vect=get_parent().get_node("../Rey_p1").global_position
+	#var vect=get_parent().get_node("../Rey_p1").global_position
+	var vect=Jugador.posicion
 	var estadoEspacial=get_world_2d().direct_space_state
 	var posicion2=global_position
 	var resultadoRayo=estadoEspacial.intersect_ray(posicion2,vect,[self])
@@ -260,15 +264,16 @@ func _on_AnimatedSprite_animation_finished():
 			else:
 				botar_item()
 				cambiarTransicion_a(MUERTE)
+				$CollisionShape2D.disabled=true
+				dead = true
 				$pighurt.stop()
 		MUERTE:
 			Jugador.score +=10
 			$pighurt.stop()
 			$AnimatedSprite.stop()
-			$CollisionShape2D.disabled=true
-			dead = true
 			$desaparicion.start()
-			
+			if final :
+				Jugador.win = true
 
 func botar_item():
 	print(Jugador.posicion)
@@ -308,3 +313,6 @@ func items(c,d,k):
 	corazon = c
 	diamante = d
 	key = k
+
+func ultimo():
+	final = true

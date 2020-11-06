@@ -1,6 +1,6 @@
 extends Node
 
-var posicion
+var posicion = Vector2(1,1)
 var vidas = 5
 var vida = vidas
 var can_action

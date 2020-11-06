@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "cerdonio",
+"language": "GDScript",
+"path": "res://Enemigos/cerdo/CerdoEnemigo.gd"
+} ]
 _global_script_class_icons={
-
+"cerdonio": ""
 }
 
 [application]
@@ -28,11 +33,13 @@ config/windows_native_icon="res://Assets/Sprites/icon.ico"
 Jugador="*res://Recursos/Propiedades_Jugador.gd"
 Puerta="*res://Recursos/Propiedades_puerta.gd"
 Music="*res://GUI/Music/music.gd"
+InGame="*res://Recursos/In_game.gd"
 
 [display]
 
 window/size/resizable=false
 window/size/always_on_top=true
+window/stretch/mode="2d"
 
 [importer_defaults]
 
@@ -106,6 +113,7 @@ ui_page_down={
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
 quality/2d/use_pixel_snap=true

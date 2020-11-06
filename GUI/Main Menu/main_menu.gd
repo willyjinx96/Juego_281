@@ -13,7 +13,7 @@ func _on_salir_pressed():
 
 
 func _on_jugar_pressed():
-	get_tree().change_scene("res://Levels/Level_1.tscn")
+	get_tree().change_scene("res://Levels/escenarios/Level_1.tscn")
 	queue_free()
 	pass # Replace with function body.
 

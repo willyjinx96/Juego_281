@@ -51,4 +51,4 @@ func add_heart():
 		live_bar.append(new_heart)
 		Jugador.vida +=1
 		vidas +=1
-		crear_barra()
+		#crear_barra()

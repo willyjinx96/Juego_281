@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 #maquina de estados (Animacion)
-enum {IDLE, RUN, JUMP, FALL, GROUND, ATTACK, HIT, DEAD, DOOR_IN, DOOR_OUT,INVISIBLE}
+enum {IDLE, RUN, JUMP, FALL, GROUND, ATTACK, HIT, DEAD, DOOR_IN, DOOR_OUT,INVISIBLE ,JOY}
 var state
 var current_animation
 var new_animation
@@ -45,6 +45,8 @@ var moverse
 var input_state
 
 func _ready():
+	if InGame.saving_position !=null:
+		global_position=InGame.saving_position
 	vidas = Jugador.vida
 	input_state=true
 	movimiento_Personaje(true)
@@ -53,6 +55,10 @@ func _ready():
 	#Jugador.cambiar_vida(vidas)
 	
 func _physics_process(delta):
+	
+#	if Jugador.win:
+#		transition_to(JOY)
+
 	Jugador.posicion = global_position
 	#Jugador.connect("reiniciar",self,"reiniciar")
 	estados()#Cambia de estados de la animacion
@@ -110,6 +116,10 @@ func transition_to(new_state):
 		INVISIBLE:
 			new_animation = "invisible"
 			n_sfx=-1
+		JOY:
+			new_animation = "joy"
+			n_sfx=-1
+			
 func _on_movement_animation_finished():
 	if $movement.animation== "attack":
 		animation_finished=1
@@ -146,6 +156,10 @@ func _on_movement_animation_finished():
 	if $movement.animation == "invisible":
 		animation_finished = 5
 		teleport = false
+#	if $movement.animation == "joy":
+#		InGame.emit_signal("final")
+#		pass
+		
 
 
 func _on_KinematicBody2D_attack():
@@ -231,6 +245,13 @@ func estados():
 		transition_to(FALL)
 	if state in [HIT,IDLE,JUMP,FALL] and Jugador.vida<=0 and animation_finished==2:
 		transition_to(DEAD)
+		
+#festejar
+	if state in [IDLE, RUN, JUMP, FALL, ATTACK] and Jugador.win and is_on_floor():
+		$final.start()
+		transition_to(JOY)
+		cambiar_estado(false)
+		movimiento_Personaje(false)
 
 #WILLY ESTO HICE PARA PROBAR EL LLAMADO DEL CERDITO AL HACERLE DAÑO :V
 func _on_ataque_body_entered(body):
@@ -335,3 +356,8 @@ func teletransportar_a(posicion):
 	#estado_fisicas(false)
 	#$movement.play("invisible")
 	pass
+
+
+func _on_final_timeout():
+	InGame.emit_signal("final")
+	pass # Replace with function body.

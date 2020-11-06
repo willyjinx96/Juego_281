@@ -34,6 +34,7 @@ func _on_animacion_animation_finished(anim_name):
 		Jugador.vida = Jugador.vidas
 		Jugador.score = 0
 		Jugador.keys = 0
+		Puerta.reset()
 		#Jugador.emit_signal("reiniciar")
 		queue_free()
 	elif boton ==2 :
